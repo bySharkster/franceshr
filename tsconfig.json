@@ -37,6 +37,9 @@
   ],
   "exclude": [
     "node_modules",
-    "supabase/functions/**"
+    "supabase/**",
+    "seed.ts",
+    "seed.config.ts",
+    ".snaplet/**"
   ]
 }
