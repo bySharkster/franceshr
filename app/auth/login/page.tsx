@@ -1,4 +1,4 @@
-import { LoginForm } from "@/components/molecules/forms/login-form";
+import { LoginForm } from "@/components/molecules/forms/auth/login-form";
 
 export default function Page() {
   return (

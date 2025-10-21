@@ -1,4 +1,5 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import "npm:tslib@2.6.0";
 import Stripe from "npm:stripe@19.1.0";
 import { createClient } from "npm:@supabase/supabase-js@2.33.0";
 const supabaseUrl = Deno.env.get("NEXT_PUBLIC_SUPABASE_URL");

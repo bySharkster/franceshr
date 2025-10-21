@@ -1,4 +1,4 @@
-import { SignUpForm } from "@/components/molecules/forms/sign-up-form";
+import { SignUpForm } from "@/components/molecules/forms/auth/sign-up-form";
 
 export default function Page() {
   return (

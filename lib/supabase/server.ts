@@ -1,6 +1,7 @@
 /** biome-ignore-all lint/style/noNonNullAssertion: Default Supabase Declaration */
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { supabaseUrl, supabaseAnonKey } from "./check-env";
 
 /**
  * Especially important if using Fluid compute: Don't put this client in a
@@ -11,8 +12,8 @@ export async function createClient() {
   const cookieStore = await cookies();
 
   return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseUrl,
+    supabaseAnonKey,
     {
       cookies: {
         getAll() {

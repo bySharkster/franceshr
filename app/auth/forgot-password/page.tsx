@@ -1,4 +1,4 @@
-import { ForgotPasswordForm } from "@/components/molecules/forms/forgot-password-form";
+import { ForgotPasswordForm } from "@/components/molecules/forms/auth/forgot-password-form";
 
 export default function Page() {
   return (
