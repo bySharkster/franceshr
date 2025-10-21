@@ -1,7 +1,7 @@
 // app/api/stripe-webhook/route.js
 import { NextResponse } from 'next/server';
 import { stripeWebhookSecret } from '@/lib/stripe/check-env';
-import { createClient } from '@/lib/supabase/server';
+import { createClient } from '@/lib/supabase/service-role-client';
 import stripe from '@/lib/stripe/get-stripe';
 import type Stripe from 'stripe';
 
