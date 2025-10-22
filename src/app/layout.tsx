@@ -1,7 +1,7 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Readex_Pro } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   description: "The fastest way to land your next job",
 };
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const readexPro = Readex_Pro({
+  variable: "--font-readex-pro",
   display: "swap",
   subsets: ["latin"],
 });
@@ -31,13 +31,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Favicon */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
+        {/* Google Fonts */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap"
+          rel="stylesheet"
+        />
       </head>
-      <body className={`${geistSans.className} antialiased`}>
+      <body className={`${readexPro.className} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

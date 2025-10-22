@@ -29,7 +29,7 @@ export const Primary: Story = {
   args: {
     primary: true,
     label: "Button",
-    backgroundColor: "#2563EB",
+    backgroundColor: "#6E85B7",
     size: "medium",
   },
 };
@@ -50,13 +50,6 @@ export const Large: Story = {
 export const Small: Story = {
   args: {
     size: "small",
-    label: "Button",
-  },
-};
-
-export const ButtonFalse: Story = {
-  args: {
-    primary: false,
     label: "Button",
   },
 };
