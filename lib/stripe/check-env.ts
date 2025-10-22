@@ -1,7 +1,7 @@
 // Stripe Publishable Key
 let stripePublicKey: string;
 if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
-  throw new Error('Missing Stripe public key');
+  throw new Error("Missing Stripe public key");
 } else {
   stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
 }
@@ -9,7 +9,7 @@ if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
 // Stripe Secret Key
 let stripeSecretKey: string;
 if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('Missing Stripe secret key');
+  throw new Error("Missing Stripe secret key");
 } else {
   stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 }
@@ -17,10 +17,9 @@ if (!process.env.STRIPE_SECRET_KEY) {
 // Stripe Webhook Secret
 let stripeWebhookSecret: string;
 if (!process.env.STRIPE_WEBHOOK_SECRET) {
-  throw new Error('Missing Stripe webhook secret');
+  throw new Error("Missing Stripe webhook secret");
 } else {
   stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 }
 
 export { stripePublicKey, stripeSecretKey, stripeWebhookSecret };
-

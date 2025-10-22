@@ -1,8 +1,3 @@
-
 export function HowItWorks() {
-  return (
-    <div className="flex flex-col gap-16 items-center">
-    How It Works
-    </div>
-  );
+  return <div className="flex flex-col items-center gap-16">How It Works</div>;
 }

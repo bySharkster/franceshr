@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function CancelPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl mx-auto">
-        <div className="bg-white rounded-lg shadow-md p-8">
+    <div className="min-h-screen bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-2xl">
+        <div className="rounded-lg bg-white p-8 shadow-md">
           {/* Cancel Icon */}
-          <div className="flex justify-center mb-6">
+          <div className="mb-6 flex justify-center">
             <div className="rounded-full bg-yellow-100 p-3">
               <svg
-                className="w-16 h-16 text-yellow-600"
+                className="h-16 w-16 text-yellow-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -27,49 +27,49 @@ export default function CancelPage() {
             </div>
           </div>
 
-          <h1 className="text-3xl font-bold text-gray-900 text-center mb-2">Payment Cancelled</h1>
-          <p className="text-gray-600 text-center mb-8">
+          <h1 className="mb-2 text-center text-3xl font-bold text-gray-900">Payment Cancelled</h1>
+          <p className="mb-8 text-center text-gray-600">
             Your payment was cancelled. No charges have been made to your account.
           </p>
 
-          <div className="bg-gray-50 rounded-lg p-6 mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">What happened?</h2>
-            <p className="text-gray-600 mb-4">
+          <div className="mb-6 rounded-lg bg-gray-50 p-6">
+            <h2 className="mb-3 text-lg font-semibold text-gray-900">What happened?</h2>
+            <p className="mb-4 text-gray-600">
               You cancelled the checkout process before completing your payment. This is completely
               normal and happens when:
             </p>
-            <ul className="text-gray-600 space-y-2 list-disc list-inside">
+            <ul className="list-inside list-disc space-y-2 text-gray-600">
               <li>You clicked the back button during checkout</li>
               <li>You closed the payment window</li>
               <li>You decided not to complete the purchase</li>
             </ul>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row">
             <Link
               href="/pay"
-              className="flex-1 bg-blue-600 text-white text-center py-3 px-4 rounded-md font-medium hover:bg-blue-700 transition-colors"
+              className="flex-1 rounded-md bg-blue-600 px-4 py-3 text-center font-medium text-white transition-colors hover:bg-blue-700"
             >
               Try Again
             </Link>
             <Link
               href="/"
-              className="flex-1 bg-gray-200 text-gray-800 text-center py-3 px-4 rounded-md font-medium hover:bg-gray-300 transition-colors"
+              className="flex-1 rounded-md bg-gray-200 px-4 py-3 text-center font-medium text-gray-800 transition-colors hover:bg-gray-300"
             >
               Go to Home
             </Link>
           </div>
         </div>
 
-        <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h2 className="text-sm font-semibold text-blue-900 mb-2">Need Help?</h2>
-          <p className="text-sm text-blue-800 mb-2">
+        <div className="mt-8 rounded-lg border border-blue-200 bg-blue-50 p-4">
+          <h2 className="mb-2 text-sm font-semibold text-blue-900">Need Help?</h2>
+          <p className="mb-2 text-sm text-blue-800">
             If you experienced any issues during checkout or have questions about our products,
             please don&apos;t hesitate to contact us.
           </p>
           <Link
             href="/contact"
-            className="text-sm text-blue-600 hover:text-blue-800 font-medium underline"
+            className="text-sm font-medium text-blue-600 underline hover:text-blue-800"
           >
             Contact Support
           </Link>

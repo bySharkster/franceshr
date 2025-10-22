@@ -1,6 +1,7 @@
-import Stripe from 'stripe';
-import { stripeSecretKey } from '@/lib/stripe/check-env';
+import Stripe from "stripe";
 
-const stripe = new Stripe(stripeSecretKey, { apiVersion: '2025-09-30.clover' });
+import { stripeSecretKey } from "@/lib/stripe/check-env";
 
-export default stripe;   
+const stripe = new Stripe(stripeSecretKey, { apiVersion: "2025-09-30.clover" });
+
+export default stripe;

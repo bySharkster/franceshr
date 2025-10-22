@@ -1,6 +1,7 @@
 /** biome-ignore-all lint/style/noNonNullAssertion: Default Supabase Declaration */
 import { createServerClient } from "@supabase/ssr";
-import { NextResponse, type NextRequest } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
+
 import { hasEnvVars } from "../utils";
 
 export async function updateSession(request: NextRequest) {
@@ -26,9 +27,7 @@ export async function updateSession(request: NextRequest) {
         },
         setAll(cookiesToSet) {
           // biome-ignore lint/suspicious/useIterableCallbackReturn: Supabase Suggest Leaving This as is.
-          cookiesToSet.forEach(({ name, value }) =>
-            request.cookies.set(name, value),
-          );
+          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
           supabaseResponse = NextResponse.next({
             request,
           });

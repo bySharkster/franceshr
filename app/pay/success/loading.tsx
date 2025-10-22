@@ -1,58 +1,58 @@
 export default function SuccessLoading() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl mx-auto">
-        <div className="bg-white rounded-lg shadow-md p-8 animate-pulse">
+    <div className="min-h-screen bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-2xl">
+        <div className="animate-pulse rounded-lg bg-white p-8 shadow-md">
           {/* Icon skeleton */}
-          <div className="flex justify-center mb-6">
-            <div className="rounded-full bg-gray-200 w-24 h-24" />
+          <div className="mb-6 flex justify-center">
+            <div className="h-24 w-24 rounded-full bg-gray-200" />
           </div>
 
           {/* Title skeleton */}
-          <div className="h-8 bg-gray-200 rounded w-2/3 mx-auto mb-2" />
-          <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto mb-8" />
+          <div className="mx-auto mb-2 h-8 w-2/3 rounded bg-gray-200" />
+          <div className="mx-auto mb-8 h-4 w-1/2 rounded bg-gray-200" />
 
           {/* Order details skeleton */}
-          <div className="bg-gray-50 rounded-lg p-6 mb-6">
-            <div className="h-5 bg-gray-200 rounded w-32 mb-4" />
+          <div className="mb-6 rounded-lg bg-gray-50 p-6">
+            <div className="mb-4 h-5 w-32 rounded bg-gray-200" />
             <div className="space-y-3">
               <div className="flex justify-between">
-                <div className="h-4 bg-gray-200 rounded w-24" />
-                <div className="h-4 bg-gray-200 rounded w-32" />
+                <div className="h-4 w-24 rounded bg-gray-200" />
+                <div className="h-4 w-32 rounded bg-gray-200" />
               </div>
               <div className="flex justify-between">
-                <div className="h-4 bg-gray-200 rounded w-20" />
-                <div className="h-4 bg-gray-200 rounded w-28" />
+                <div className="h-4 w-20 rounded bg-gray-200" />
+                <div className="h-4 w-28 rounded bg-gray-200" />
               </div>
               <div className="flex justify-between">
-                <div className="h-4 bg-gray-200 rounded w-16" />
-                <div className="h-4 bg-gray-200 rounded w-24" />
+                <div className="h-4 w-16 rounded bg-gray-200" />
+                <div className="h-4 w-24 rounded bg-gray-200" />
               </div>
               <div className="flex justify-between">
-                <div className="h-4 bg-gray-200 rounded w-14" />
-                <div className="h-4 bg-gray-200 rounded w-16" />
+                <div className="h-4 w-14 rounded bg-gray-200" />
+                <div className="h-4 w-16 rounded bg-gray-200" />
               </div>
               <div className="flex justify-between">
-                <div className="h-4 bg-gray-200 rounded w-12" />
-                <div className="h-4 bg-gray-200 rounded w-40" />
+                <div className="h-4 w-12 rounded bg-gray-200" />
+                <div className="h-4 w-40 rounded bg-gray-200" />
               </div>
             </div>
           </div>
 
           {/* Buttons skeleton */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="flex-1 h-12 bg-gray-200 rounded" />
-            <div className="flex-1 h-12 bg-gray-200 rounded" />
+          <div className="flex flex-col gap-4 sm:flex-row">
+            <div className="h-12 flex-1 rounded bg-gray-200" />
+            <div className="h-12 flex-1 rounded bg-gray-200" />
           </div>
         </div>
 
         {/* Info box skeleton */}
-        <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <div className="h-4 bg-blue-200 rounded w-24 mb-2" />
+        <div className="mt-8 rounded-lg border border-blue-200 bg-blue-50 p-4">
+          <div className="mb-2 h-4 w-24 rounded bg-blue-200" />
           <div className="space-y-2">
-            <div className="h-3 bg-blue-200 rounded w-full" />
-            <div className="h-3 bg-blue-200 rounded w-5/6" />
-            <div className="h-3 bg-blue-200 rounded w-4/5" />
+            <div className="h-3 w-full rounded bg-blue-200" />
+            <div className="h-3 w-5/6 rounded bg-blue-200" />
+            <div className="h-3 w-4/5 rounded bg-blue-200" />
           </div>
         </div>
       </div>

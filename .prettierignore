@@ -1,0 +1,30 @@
+# Dependencies
+node_modules
+
+# Build outputs
+.next
+build
+dist
+out
+
+# VCS / hooks
+.husky
+
+# Package manager lockfiles
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Supabase artifacts
+supabase/.branches
+supabase/.temp
+supabase/functions/.deno
+
+# Snaplet artifacts
+.snaplet/
+
+# Misc
+coverage
+migrations
+.tmp
+.DS_Store
