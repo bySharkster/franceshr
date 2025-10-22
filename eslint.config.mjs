@@ -1,5 +1,7 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
 import { FlatCompat } from "@eslint/eslintrc";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
+import storybook from "eslint-plugin-storybook";
 import unusedImports from "eslint-plugin-unused-imports";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -29,8 +31,7 @@ const eslintConfig = [
       "yarn.lock",
       "package-lock.json",
     ],
-  },
-  // Next.js + TypeScript base, then turn off formatting rules via Prettier
+  }, // Next.js + TypeScript base, then turn off formatting rules via Prettier
   ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
   {
     plugins: {
@@ -62,6 +63,7 @@ const eslintConfig = [
       ],
     },
   },
+  ...storybook.configs["flat/recommended"],
 ];
 
 export default eslintConfig;
