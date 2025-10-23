@@ -94,7 +94,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
             />
             <div className="absolute inset-0 container mx-auto flex flex-col items-center justify-center p-6">
-              <p className="text-background/80 text-center text-2xl font-bold">
+              <p className="text-background/80 dark:text-foreground/80 text-center text-2xl font-bold">
                 ¡Únete a más de 100 personas que ya usan nuestros servicios para conseguir el
                 trabajo de sus sueños!
               </p>

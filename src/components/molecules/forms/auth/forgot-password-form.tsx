@@ -43,7 +43,7 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
             />
             <div className="absolute inset-0 container mx-auto flex flex-col items-center justify-center p-6">
-              <p className="text-background/80 text-center text-2xl font-bold">
+              <p className="text-background/80 dark:text-foreground/80 text-center text-2xl font-bold">
                 No te preocupes, recuperar tu acceso es fácil y rápido. ¡Estamos aquí para ayudarte!
               </p>
             </div>
