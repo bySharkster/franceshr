@@ -35,7 +35,7 @@
  * }
  */
 
-import { ArrowLeft, ArrowRight, Check, Home, Loader2, type LucideIcon,Trash2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Home, Loader2, type LucideIcon, Trash2 } from "lucide-react";
 
 // Icon mapping for dynamic icon rendering
 export const iconMap = {
