@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { AuthButton } from "@/components/atoms/buttons/auth-button";
-import { DeployButton } from "@/components/atoms/buttons/deploy-button";
 import { EnvVarWarning } from "@/components/molecules/env-var-warning";
 import { ThemeSwitcher } from "@/components/molecules/theme-switcher";
 import { hasEnvVars } from "@/lib/utils";
@@ -10,13 +9,10 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
   return (
     <main className="flex min-h-screen flex-col items-center">
       <div className="flex w-full flex-1 flex-col items-center gap-20">
-        <nav className="flex h-16 w-full justify-center border-b border-b-foreground/10">
+        <nav className="border-b-foreground/10 flex h-16 w-full justify-center border-b">
           <div className="flex w-full max-w-5xl items-center justify-between p-3 px-5 text-sm">
             <div className="flex items-center gap-5 font-semibold">
-              <Link href={"/"}>Next.js Supabase Starter</Link>
-              <div className="flex items-center gap-2">
-                <DeployButton />
-              </div>
+              <Link href={"/"}>Franceshr</Link>
             </div>
             {!hasEnvVars ? <EnvVarWarning /> : <AuthButton />}
           </div>
@@ -25,7 +21,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
 
         <footer className="mx-auto flex w-full items-center justify-center gap-8 border-t py-16 text-center text-xs">
           <p>
-            Powered by{" "}
+            © {new Date().getFullYear()} Franceshr. Todos los derechos reservados.
             <a
               href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
               target="_blank"

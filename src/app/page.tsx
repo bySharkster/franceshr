@@ -1,10 +1,10 @@
+import { HeaderWrapper } from "@/components/organisms/HeaderWrapper";
 import { About } from "@/components/organisms/sections/about";
 import { Contact } from "@/components/organisms/sections/contact";
 import { FAQ } from "@/components/organisms/sections/faq";
 import { Footer } from "@/components/organisms/sections/footer";
 import { Hero } from "@/components/organisms/sections/hero";
 import { HowItWorks } from "@/components/organisms/sections/how-it-works";
-import { Navbar } from "@/components/organisms/sections/navbar";
 import { Pricing } from "@/components/organisms/sections/pricing";
 import { Services } from "@/components/organisms/sections/services";
 import { Testimonials } from "@/components/organisms/sections/testimonials";
@@ -14,7 +14,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center">
       <div className="flex w-full flex-1 flex-col items-center gap-20">
         {/* Navbar */}
-        <Navbar />
+        <HeaderWrapper />
         {/* Main Content */}
         <div className="flex max-w-5xl flex-1 flex-col gap-20 p-5">
           {/* Hero */}

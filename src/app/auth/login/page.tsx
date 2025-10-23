@@ -1,11 +1,10 @@
 import { LoginForm } from "@/components/molecules/forms/auth/login-form";
+import { AuthWrapper } from "@/components/organisms/wrappers/auth-wrapper";
 
-export default function Page() {
+export default function LoginPage() {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm">
-        <LoginForm />
-      </div>
-    </div>
+    <AuthWrapper>
+      <LoginForm />
+    </AuthWrapper>
   );
 }

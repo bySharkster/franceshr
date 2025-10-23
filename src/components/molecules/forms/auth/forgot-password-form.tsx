@@ -1,99 +1,59 @@
-"use client";
-
+import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useId } from "react";
 
 import { Button } from "@/components/atoms/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/atoms/ui/card";
+import { Card, CardContent } from "@/components/atoms/ui/card";
+import { Field, FieldDescription, FieldGroup, FieldLabel } from "@/components/atoms/ui/field";
 import { Input } from "@/components/atoms/ui/input";
-import { Label } from "@/components/atoms/ui/label";
-import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
-export function ForgotPasswordForm({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleForgotPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const supabase = createClient();
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      // The url which will be included in the email. This URL needs to be configured in your redirect URLs in the Supabase dashboard at https://supabase.com/dashboard/project/_/auth/url-configuration
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/auth/update-password`,
-      });
-      if (error) throw error;
-      setSuccess(true);
-    } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
+export function ForgotPasswordForm({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      {success ? (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl">Check Your Email</CardTitle>
-            <CardDescription>Password reset instructions sent</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              If you registered using your email and password, you will receive a password reset
-              email.
-            </p>
-          </CardContent>
-        </Card>
-      ) : (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl">Reset Your Password</CardTitle>
-            <CardDescription>
-              Type in your email and we&apos;ll send you a link to reset your password
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleForgotPassword}>
-              <div className="flex flex-col gap-6">
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    name="email"
-                    type="email"
-                    placeholder="m@example.com"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                {error && <p className="text-sm text-red-500">{error}</p>}
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Sending..." : "Send reset email"}
-                </Button>
+      <Card className="overflow-hidden p-0">
+        <CardContent className="grid p-0 md:grid-cols-2">
+          <form className="p-6 md:p-8">
+            <FieldGroup>
+              <div className="flex flex-col items-start gap-2">
+                <Image src="/logo.svg" alt="Logo" width={32} height={32} />
+                <h1 className="text-2xl font-bold">Recupera tu contraseña</h1>
+                <p className="text-muted-foreground text-balance">
+                  Ingresa tu email y te enviaremos un enlace para restablecer tu contraseña
+                </p>
               </div>
-              <div className="mt-4 text-center text-sm">
-                Already have an account?{" "}
-                <Link href="/auth/login" className="underline underline-offset-4">
-                  Login
-                </Link>
-              </div>
-            </form>
-          </CardContent>
-        </Card>
-      )}
+              <Field>
+                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <Input id={useId()} type="email" placeholder="m@example.com" required />
+              </Field>
+              <Field>
+                <Button type="submit">Enviar enlace de recuperación</Button>
+              </Field>
+              <FieldDescription className="text-center">
+                ¿Recordaste tu contraseña? <Link href="/auth/login">Inicia sesión</Link>
+              </FieldDescription>
+            </FieldGroup>
+          </form>
+          <div className="bg-muted relative hidden md:block">
+            <Image
+              src="/login.png"
+              alt="Forgot password"
+              width={500}
+              height={500}
+              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+            />
+            <div className="absolute inset-0 container mx-auto flex flex-col items-center justify-center p-6">
+              <p className="text-background/80 text-center text-2xl font-bold">
+                No te preocupes, recuperar tu acceso es fácil y rápido. ¡Estamos aquí para ayudarte!
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      <FieldDescription className="px-6 text-center">
+        Al hacer clic en continuar, aceptas nuestros <Link href="/terms">Términos de Servicio</Link>{" "}
+        y <Link href="/privacy">Política de Privacidad</Link>.
+      </FieldDescription>
     </div>
   );
 }
