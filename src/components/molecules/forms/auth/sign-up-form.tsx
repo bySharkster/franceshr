@@ -22,7 +22,14 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
           <form className="p-6 md:p-8">
             <FieldGroup>
               <div className="flex flex-col items-start gap-2">
-                <Image src="/logo.svg" alt="Logo" width={32} height={32} />
+                <Image
+                  src="/logo.svg"
+                  alt="Logo"
+                  width={32}
+                  height={32}
+                  priority
+                  className="h-8 w-8"
+                />
                 <h1 className="text-2xl font-bold">Crea tu cuenta</h1>
                 <p className="text-muted-foreground text-balance">
                   Regístrate para comenzar tu búsqueda
@@ -89,10 +96,11 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
               alt="Sign up"
               width={500}
               height={500}
+              priority
               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
             />
             <div className="absolute inset-0 container mx-auto flex flex-col items-center justify-center p-6">
-              <p className="text-background/80 dark:text-foreground/80 text-center text-2xl font-bold">
+              <p className="text-center text-2xl text-base/90 font-bold">
                 ¡Comienza tu viaje profesional hoy! Crea tu perfil y accede a oportunidades
                 exclusivas.
               </p>
