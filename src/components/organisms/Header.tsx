@@ -1,99 +1,49 @@
-import type { JwtPayload } from "@supabase/supabase-js";
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { Button } from "../atoms/ui/button";
-
 export interface HeaderProps {
-  hasEnvVars?: boolean;
-  user?: JwtPayload;
+  navSection?: ReactNode;
   authSection?: ReactNode;
-  onLogin?: () => void;
-  onSignup?: () => void;
-  onLogout?: () => void;
 }
 
-export const Header = ({
-  hasEnvVars = true,
-  user,
-  authSection,
-  onLogin,
-  onSignup,
-  onLogout,
-}: HeaderProps) => {
-  const isAuthenticated = !!user;
-
+export const Header = ({ navSection, authSection }: HeaderProps) => {
+  const renderNavSection = () => {
+    if (navSection) {
+      return navSection;
+    }
+  };
   const renderAuthSection = () => {
     if (authSection) {
       return authSection;
     }
 
-    if (!hasEnvVars) {
-      return (
-        <div className="flex items-center gap-2 rounded-md border border-yellow-500 bg-yellow-50 px-3 py-2 text-sm text-yellow-800">
-          <span>⚠️ Missing environment variables</span>
-        </div>
-      );
-    }
-
-    if (isAuthenticated) {
-      return (
-        <div className="flex items-center gap-2">
-          <span>Hola, {user?.email}!</span>
-          <Button
-            asChild
-            className=""
-            iconLeft={null}
-            iconRight={<ArrowRight />}
-            onClick={() => {}}
-            size="default"
-            variant="default"
-          >
-            <Link href="/protected">Ir al Panel</Link>
-          </Button>{" "}
-          <Button
-            type="button"
-            onClick={onLogout}
-            className="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-8 items-center justify-center gap-2 rounded-md border px-3 text-xs font-medium whitespace-nowrap shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-          >
-            Sign out
-          </Button>
-        </div>
-      );
-    }
-
-    return (
-      <>
-        <button
-          type="button"
-          onClick={onLogin}
-          className="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-8 items-center justify-center gap-2 rounded-md border px-3 text-xs font-medium whitespace-nowrap shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-        >
-          Sign in
-        </button>
-        <button
-          type="button"
-          onClick={onSignup}
-          className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring inline-flex h-8 items-center justify-center gap-2 rounded-md px-3 text-xs font-medium whitespace-nowrap shadow transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-        >
-          Sign up
-        </button>
-      </>
-    );
+    return null;
   };
 
   return (
     <nav className="border-b-foreground/10 flex h-16 w-full justify-center border-b">
-      <div className="flex w-full max-w-5xl items-center justify-between p-3 px-5 text-sm">
-        <div className="flex items-center gap-5 font-semibold">
-          <Image src="/logo.svg" alt="Logo" width={32} height={32} />
-          <h1 className="hidden font-sans text-3xl md:block">
-            <Link href={"/"}>FrancesHR</Link>
-          </h1>
+      <div className="relative flex w-full max-w-7xl items-center justify-between gap-4 p-3 px-5 text-sm">
+        {/* Logo */}
+        <div className="flex items-center gap-3 font-semibold">
+          <Link href="/" className="flex items-center gap-3">
+            <Image src="/logo.svg" alt="Logo" width={32} height={32} />
+            <h1 className="hidden font-sans text-2xl md:flex">FrancesHR</h1>
+          </Link>
         </div>
-        <div className="flex items-center gap-2">{renderAuthSection()}</div>
+
+        {/* Desktop Navigation - Centered */}
+        <div className="absolute top-1/2 left-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:flex">
+          {renderNavSection()}
+        </div>
+
+        <div className="flex items-center gap-4">
+          {/* Auth Section - Right */}
+          <div className="flex items-center gap-2">{renderAuthSection()}</div>
+
+          {/* Mobile View */}
+          <div className="flex h-6 w-6 items-center gap-2 md:hidden">{renderNavSection()}</div>
+        </div>
       </div>
     </nav>
   );

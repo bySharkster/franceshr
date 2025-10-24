@@ -1,3 +1,4 @@
+import type { JwtPayload } from "@supabase/supabase-js";
 import Link from "next/link";
 
 import { createClient } from "@/lib/supabase/server";
@@ -6,6 +7,7 @@ import { hasEnvVars } from "@/lib/utils";
 import { LogoutButton } from "../atoms/buttons/logout-button";
 import { Button } from "../atoms/ui/button";
 import { EnvVarWarning } from "../molecules/env-var-warning";
+import { NavSection } from "../molecules/nav-section";
 import { Header } from "./Header";
 
 /**
@@ -18,26 +20,27 @@ import { Header } from "./Header";
 export async function HeaderWrapper() {
   const supabase = await createClient();
   const { data } = await supabase.auth.getClaims();
-  const user = data?.claims;
+  const user: JwtPayload | null = data?.claims || null;
 
+  const navSection = <NavSection />;
   // Build the auth section with real Next.js Links and forms
   const authSection = !hasEnvVars ? (
     <EnvVarWarning />
   ) : user ? (
     <div className="flex items-center gap-4">
-      Hey, {user.email}!
+      Hola, {user.user_metadata.full_name}!
       <LogoutButton />
     </div>
   ) : (
     <div className="flex gap-2">
-      <Button asChild size="sm" variant="outline">
-        <Link href="/auth/login">Sign in</Link>
+      <Button asChild size="sm" variant="outline" className="hidden md:flex">
+        <Link href="/auth/login">Iniciar sesión</Link>
       </Button>
       <Button asChild size="sm" variant="default">
-        <Link href="/auth/sign-up">Sign up</Link>
+        <Link href="/auth/sign-up">Registrarse</Link>
       </Button>
     </div>
   );
 
-  return <Header hasEnvVars={!!hasEnvVars} user={user ?? undefined} authSection={authSection} />;
+  return <Header navSection={navSection} authSection={authSection} />;
 }

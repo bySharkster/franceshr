@@ -113,11 +113,11 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                 />
               </Field>
               <Field>
-                <div className="flex items-center">
+                <div className="flex items-center justify-between">
                   <FieldLabel htmlFor="password">Contraseña</FieldLabel>
                   <Link
                     href="/auth/forgot-password"
-                    className="ml-auto text-sm underline-offset-2 hover:underline"
+                    className="text-right text-sm underline-offset-2 hover:underline"
                   >
                     ¿Olvidaste tu contraseña?
                   </Link>

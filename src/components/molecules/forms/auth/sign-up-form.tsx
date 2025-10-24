@@ -105,6 +105,14 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
                 </div>
               )}
               <Field>
+                <FieldLabel htmlFor="name">Nombre</FieldLabel>
+                <Input id={useId()} name="name" type="text" required disabled={isPending} />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="last-name">Apellido</FieldLabel>
+                <Input id={useId()} name="last-name" type="text" required disabled={isPending} />
+              </Field>
+              <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
                   ref={emailInputRef}

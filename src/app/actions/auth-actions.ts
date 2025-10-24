@@ -14,9 +14,11 @@ export async function signUp(formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
   const repeatPassword = formData.get("repeat-password") as string;
+  const name = formData.get("name") as string;
+  const lastName = formData.get("last-name") as string;
 
   // Validation
-  if (!email || !password || !repeatPassword) {
+  if (!email || !password || !repeatPassword || !name || !lastName) {
     return {
       error: "Todos los campos son requeridos",
     };
@@ -38,6 +40,9 @@ export async function signUp(formData: FormData) {
     email,
     password,
     options: {
+      data: {
+        full_name: `${name} ${lastName}`,
+      },
       emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
     },
   });
