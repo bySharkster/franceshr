@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useId, useState, useTransition } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useId, useRef, useState, useTransition } from "react";
 
 import { signInWithOAuth, signUp } from "@/app/actions/auth-actions";
 import { Button } from "@/components/atoms/ui/button";
@@ -21,10 +22,34 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [email, setEmail] = useState<string>("");
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const searchParams = useSearchParams();
+
+  // Restore email from URL params or localStorage
+  useEffect(() => {
+    const emailFromUrl = searchParams.get("email");
+    const emailFromStorage =
+      typeof window !== "undefined" ? localStorage.getItem("auth-email") : null;
+    const restoredEmail = emailFromUrl || emailFromStorage || "";
+
+    if (restoredEmail) {
+      setEmail(restoredEmail);
+      if (emailInputRef.current) {
+        emailInputRef.current.value = restoredEmail;
+      }
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (formData: FormData) => {
     setError(null);
     setSuccess(null);
+
+    // Save email to localStorage for persistence
+    const emailValue = formData.get("email") as string;
+    if (emailValue && typeof window !== "undefined") {
+      localStorage.setItem("auth-email", emailValue);
+    }
 
     startTransition(async () => {
       const result = await signUp(formData);
@@ -32,6 +57,10 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
         setError(result.error);
       } else if (result?.message) {
         setSuccess(result.message);
+        // Clear stored email on success
+        if (typeof window !== "undefined") {
+          localStorage.removeItem("auth-email");
+        }
       }
     });
   };
@@ -78,12 +107,20 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
+                  ref={emailInputRef}
                   id={useId()}
                   name="email"
                   type="email"
                   placeholder="m@example.com"
                   required
                   disabled={isPending}
+                  defaultValue={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (typeof window !== "undefined") {
+                      localStorage.setItem("auth-email", e.target.value);
+                    }
+                  }}
                 />
               </Field>
               <Field>
@@ -152,7 +189,12 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
                 </Button>
               </Field>
               <FieldDescription className="text-center">
-                ¿Ya tienes una cuenta? <Link href="/auth/login">Inicia sesión</Link>
+                ¿Ya tienes una cuenta?{" "}
+                <Link
+                  href={email ? `/auth/login?email=${encodeURIComponent(email)}` : "/auth/login"}
+                >
+                  Inicia sesión
+                </Link>
               </FieldDescription>
             </FieldGroup>
           </form>

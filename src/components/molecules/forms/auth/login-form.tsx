@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useId, useState, useTransition } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useId, useRef, useState, useTransition } from "react";
 
 import { signIn, signInWithOAuth } from "@/app/actions/auth-actions";
 import { Button } from "@/components/atoms/ui/button";
@@ -19,14 +20,43 @@ import { cn } from "@/lib/utils";
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const [email, setEmail] = useState<string>("");
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const searchParams = useSearchParams();
+
+  // Restore email from URL params or localStorage
+  useEffect(() => {
+    const emailFromUrl = searchParams.get("email");
+    const emailFromStorage =
+      typeof window !== "undefined" ? localStorage.getItem("auth-email") : null;
+    const restoredEmail = emailFromUrl || emailFromStorage || "";
+
+    if (restoredEmail) {
+      setEmail(restoredEmail);
+      if (emailInputRef.current) {
+        emailInputRef.current.value = restoredEmail;
+      }
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (formData: FormData) => {
     setError(null);
+
+    // Save email to localStorage for persistence
+    const emailValue = formData.get("email") as string;
+    if (emailValue && typeof window !== "undefined") {
+      localStorage.setItem("auth-email", emailValue);
+    }
 
     startTransition(async () => {
       const result = await signIn(formData);
       if (result?.error) {
         setError(result.error);
+      } else {
+        // Clear stored email on success
+        if (typeof window !== "undefined") {
+          localStorage.removeItem("auth-email");
+        }
       }
     });
   };
@@ -66,12 +96,20 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
+                  ref={emailInputRef}
                   id={useId()}
                   name="email"
                   type="email"
                   placeholder="m@example.com"
                   required
                   disabled={isPending}
+                  defaultValue={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (typeof window !== "undefined") {
+                      localStorage.setItem("auth-email", e.target.value);
+                    }
+                  }}
                 />
               </Field>
               <Field>
@@ -128,7 +166,14 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                 </Button>
               </Field>
               <FieldDescription className="text-center">
-                No tienes una cuenta? <Link href="/auth/sign-up">Regístrate</Link>
+                No tienes una cuenta?{" "}
+                <Link
+                  href={
+                    email ? `/auth/sign-up?email=${encodeURIComponent(email)}` : "/auth/sign-up"
+                  }
+                >
+                  Regístrate
+                </Link>
               </FieldDescription>
             </FieldGroup>
           </form>
