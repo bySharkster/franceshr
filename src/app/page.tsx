@@ -1,13 +1,15 @@
 import { HeaderWrapper } from "@/components/organisms/HeaderWrapper";
 import { About } from "@/components/organisms/sections/about";
-import { Contact } from "@/components/organisms/sections/contact";
-import { FAQ } from "@/components/organisms/sections/faq";
+// import { Contact } from "@/components/organisms/sections/contact";
+// import { FAQ } from "@/components/organisms/sections/faq";
+import { FinalCTA } from "@/components/organisms/sections/final-cta";
 import { Footer } from "@/components/organisms/sections/footer";
 import { Hero } from "@/components/organisms/sections/hero";
-import { HowItWorks } from "@/components/organisms/sections/how-it-works";
-import { Pricing } from "@/components/organisms/sections/pricing";
+// import { HowItWorks } from "@/components/organisms/sections/how-it-works";
+// import { Pricing } from "@/components/organisms/sections/pricing";
 import { Services } from "@/components/organisms/sections/services";
-import { Testimonials } from "@/components/organisms/sections/testimonials";
+import { TestimonialsSection } from "@/components/organisms/sections/testimonials-section";
+import { WhyChoose } from "@/components/organisms/sections/why-choose";
 
 export default function Home() {
   return (
@@ -16,19 +18,21 @@ export default function Home() {
         {/* Navbar */}
         <HeaderWrapper />
         {/* Main Content */}
-        <div className="flex flex-1 flex-col gap-20">
+        <div className="flex flex-1 flex-col">
           {/* Hero */}
           <Hero />
 
           {/* Main Steps */}
-          <main className="flex flex-1 flex-col gap-6 px-4">
+          <main className="flex flex-1 flex-col">
             <About />
-            <Services /> {/* or <Products/> */}
-            <HowItWorks /> {/* or <CoreValues/> */}
-            <Testimonials /> {/* or <Clients/> */}
-            <FAQ /> {/* or <Questions/> */}
-            <Pricing /> {/* or <Blog/> or <News/> */}
-            <Contact />
+            <Services />
+            <WhyChoose />
+            <TestimonialsSection />
+            <FinalCTA />
+            {/* <HowItWorks /> or <CoreValues/> */}
+            {/* <FAQ /> or <Questions/> */}
+            {/* <Pricing /> or <Blog/> or <News/> */}
+            {/* <Contact /> */}
           </main>
         </div>
         {/* Footer */}
