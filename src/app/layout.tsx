@@ -43,7 +43,8 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange
+          enableColorScheme
+          storageKey="franceshr-theme"
         >
           {children}
         </ThemeProvider>

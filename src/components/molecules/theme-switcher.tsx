@@ -22,6 +22,25 @@ const ThemeSwitcher = () => {
     setMounted(true);
   }, []);
 
+  // Force repaint when theme changes
+  const handleThemeChange = (newTheme: string) => {
+    const html = document.documentElement;
+
+    // Add data attribute to disable transitions during theme change
+    html.setAttribute("data-theme-changing", "true");
+
+    // Change theme
+    setTheme(newTheme);
+
+    // Force a repaint by reading offsetHeight
+    void html.offsetHeight;
+
+    // Remove data attribute after a short delay
+    setTimeout(() => {
+      html.removeAttribute("data-theme-changing");
+    }, 100);
+  };
+
   if (!mounted) {
     return null;
   }
@@ -42,7 +61,7 @@ const ThemeSwitcher = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-content" align="start">
-        <DropdownMenuRadioGroup value={theme} onValueChange={(e) => setTheme(e)}>
+        <DropdownMenuRadioGroup value={theme} onValueChange={handleThemeChange}>
           <DropdownMenuRadioItem className="flex gap-2" value="light">
             <Sun size={ICON_SIZE} className="text-muted-foreground" /> <span>Light</span>
           </DropdownMenuRadioItem>

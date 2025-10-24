@@ -202,8 +202,29 @@
     @apply border-border outline-ring/50;
   }
 
+  /* Smooth theme transitions */
+  html {
+    color-scheme: light dark;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  html.light {
+    color-scheme: light;
+  }
+
+  /* Force repaint on theme change */
+  html[data-theme-changing] * {
+    transition: none !important;
+  }
+
   body {
     @apply bg-background text-foreground;
     letter-spacing: var(--tracking-normal);
+    transition:
+      background-color 0.2s ease-in-out,
+      color 0.2s ease-in-out;
   }
 }
