@@ -1,7 +1,9 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useId } from "react";
+import { useId, useState, useTransition } from "react";
 
+import { signIn, signInWithOAuth } from "@/app/actions/auth-actions";
 import { Button } from "@/components/atoms/ui/button";
 import { Card, CardContent } from "@/components/atoms/ui/card";
 import {
@@ -15,11 +17,34 @@ import { Input } from "@/components/atoms/ui/input";
 import { cn } from "@/lib/utils";
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (formData: FormData) => {
+    setError(null);
+
+    startTransition(async () => {
+      const result = await signIn(formData);
+      if (result?.error) {
+        setError(result.error);
+      }
+    });
+  };
+
+  const handleOAuthSignIn = (provider: "google" | "apple" | "facebook") => {
+    startTransition(async () => {
+      const result = await signInWithOAuth(provider);
+      if (result?.error) {
+        setError(result.error);
+      }
+    });
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8">
+          <form className="p-6 md:p-8" action={handleSubmit}>
             <FieldGroup>
               <div className="flex flex-col items-start gap-2">
                 <Image
@@ -32,10 +57,22 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                 />
                 <h1 className="text-2xl font-bold">Bienvenido de vuelta</h1>
                 <p className="text-muted-foreground text-balance">Inicia sesión para continuar</p>
+                {error && (
+                  <div className="bg-destructive/10 text-destructive rounded-md p-3 text-sm">
+                    {error}
+                  </div>
+                )}
               </div>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
-                <Input id={useId()} type="email" placeholder="m@example.com" required />
+                <Input
+                  id={useId()}
+                  name="email"
+                  type="email"
+                  placeholder="m@example.com"
+                  required
+                  disabled={isPending}
+                />
               </Field>
               <Field>
                 <div className="flex items-center">
@@ -47,7 +84,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                     ¿Olvidaste tu contraseña?
                   </Link>
                 </div>
-                <Input id={useId()} type="password" required />
+                <Input id={useId()} name="password" type="password" required disabled={isPending} />
               </Field>
               <Field>
                 <Button type="submit">Acceder</Button>
@@ -56,7 +93,8 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                 O continuar con
               </FieldSeparator>
               <Field className="grid grid-cols-3 gap-4">
-                <Button variant="outline" type="button">
+                {/* Apple */}
+                <Button variant="outline" type="button" disabled>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <title>Apple</title>
                     <path
@@ -66,7 +104,8 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                   </svg>
                   <span className="sr-only">Acceder con Apple</span>
                 </Button>
-                <Button variant="outline" type="button">
+                {/* Google */}
+                <Button variant="outline" type="button" onClick={() => handleOAuthSignIn("google")}>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <title>Google</title>
                     <path
@@ -76,7 +115,8 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                   </svg>
                   <span className="sr-only">Acceder con Google</span>
                 </Button>
-                <Button variant="outline" type="button">
+                {/* Meta */}
+                <Button variant="outline" type="button" disabled>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <title>Meta</title>
                     <path

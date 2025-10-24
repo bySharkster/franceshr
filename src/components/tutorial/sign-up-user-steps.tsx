@@ -11,11 +11,11 @@ export function SignUpUserSteps() {
           <p>It looks like this App is hosted on Vercel.</p>
           <p className="mt-4">
             This particular deployment is
-            <span className="relative rounded border bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground">
+            <span className="bg-muted text-secondary-foreground relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium">
               &quot;{process.env.VERCEL_ENV}&quot;
             </span>{" "}
             on
-            <span className="relative rounded border bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground">
+            <span className="bg-muted text-secondary-foreground relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium">
               https://{process.env.VERCEL_URL}
             </span>
             .
@@ -33,19 +33,19 @@ export function SignUpUserSteps() {
           <ul className="mt-4">
             <li>
               -{" "}
-              <span className="relative rounded border bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground">
-                http://localhost:3000/**
+              <span className="bg-muted text-secondary-foreground relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium">
+                {process.env.NEXT_PUBLIC_SITE_URL}
               </span>
             </li>
             <li>
               -{" "}
-              <span className="relative rounded border bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground">
+              <span className="bg-muted text-secondary-foreground relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium">
                 {`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/**`}
               </span>
             </li>
             <li>
               -{" "}
-              <span className="relative rounded border bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium text-secondary-foreground">
+              <span className="bg-muted text-secondary-foreground relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-xs font-medium">
                 {`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL?.replace(
                   ".vercel.app",
                   "",
@@ -65,7 +65,7 @@ export function SignUpUserSteps() {
           <Link
             href="https://supabase.com/docs/guides/auth/redirect-urls#vercel-preview-urls"
             target="_blank"
-            className="mt-4 flex items-center gap-1 text-sm text-primary/50 hover:text-primary"
+            className="text-primary/50 hover:text-primary mt-4 flex items-center gap-1 text-sm"
           >
             Redirect URLs Docs <ArrowUpRight size={14} />
           </Link>
@@ -74,7 +74,7 @@ export function SignUpUserSteps() {
       <TutorialStep title="Sign up your first user">
         <p>
           Head over to the{" "}
-          <Link href="auth/sign-up" className="font-bold text-foreground/80 hover:underline">
+          <Link href="auth/sign-up" className="text-foreground/80 font-bold hover:underline">
             Sign up
           </Link>{" "}
           page and sign up your first user. It&apos;s okay if this is just you for now. Your awesome

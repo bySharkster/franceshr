@@ -6,7 +6,7 @@ import { ThemeProvider } from "next-themes";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+  : `${process.env.NEXT_PUBLIC_SITE_URL}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),

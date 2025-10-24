@@ -1,4 +1,8 @@
-Database seeded successfully!
-- Created 1 product with 2 prices
-- Created 5 users (auth + public)
-- Created 5 orders (1 per user)
+-- Seed data for development
+-- This file is run after migrations
+
+-- Add any seed data here if needed
+-- For example:
+-- INSERT INTO products (id, name, description) VALUES ('prod_1', 'Test Product', 'A test product');
+
+-- No seed data for now

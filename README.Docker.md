@@ -22,7 +22,7 @@ docker compose up --build
 - App will be available at:
 
 ```
-http://localhost:3000
+http://127.0.0.1:3000
 ```
 
 ## Logs and lifecycle

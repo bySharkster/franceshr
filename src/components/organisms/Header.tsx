@@ -1,7 +1,10 @@
 import type { JwtPayload } from "@supabase/supabase-js";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+
+import { Button } from "../atoms/ui/button";
 
 export interface HeaderProps {
   hasEnvVars?: boolean;
@@ -38,14 +41,25 @@ export const Header = ({
     if (isAuthenticated) {
       return (
         <div className="flex items-center gap-2">
-          <span>Hey, {user?.email}!</span>
-          <button
+          <span>Hola, {user?.email}!</span>
+          <Button
+            asChild
+            className=""
+            iconLeft={null}
+            iconRight={<ArrowRight />}
+            onClick={() => {}}
+            size="default"
+            variant="default"
+          >
+            <Link href="/protected">Ir al Panel</Link>
+          </Button>{" "}
+          <Button
             type="button"
             onClick={onLogout}
             className="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-8 items-center justify-center gap-2 rounded-md border px-3 text-xs font-medium whitespace-nowrap shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
           >
             Sign out
-          </button>
+          </Button>
         </div>
       );
     }
