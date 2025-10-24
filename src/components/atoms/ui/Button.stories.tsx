@@ -40,6 +40,17 @@ const meta = {
       control: "text",
       description: "Additional className for the button",
     },
+    role: {
+      type: "string",
+      control: "radio",
+      description: "Role of the button",
+      options: ["button", "link", "presentation"],
+    },
+    "aria-label": {
+      type: "string",
+      control: "text",
+      description: "Aria label for the button",
+    },
     children: {
       type: "string",
       control: "text",
@@ -265,6 +276,9 @@ export const IconOnly: Story = {
     variant: "ghost",
     size: "icon",
     children: undefined,
+    className: "",
+    role: "button",
+    "aria-label": "Home",
   },
   render: (args) => <Button {...args} iconLeft={getIcon("home")} />,
 };

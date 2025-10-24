@@ -42,5 +42,5 @@ export async function HeaderWrapper() {
     </div>
   );
 
-  return <Header navSection={navSection} authSection={authSection} />;
+  return <Header navSection={navSection} authSection={authSection} hasEnvVars={hasEnvVars} />;
 }

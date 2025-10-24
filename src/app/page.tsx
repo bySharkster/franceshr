@@ -12,11 +12,11 @@ import { Testimonials } from "@/components/organisms/sections/testimonials";
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center">
-      <div className="flex w-full flex-1 flex-col items-center gap-20">
+      <div className="w-full flex-1 flex-col items-center pb-20">
         {/* Navbar */}
         <HeaderWrapper />
         {/* Main Content */}
-        <div className="flex max-w-5xl flex-1 flex-col gap-20 p-5">
+        <div className="flex flex-1 flex-col gap-20">
           {/* Hero */}
           <Hero />
 
