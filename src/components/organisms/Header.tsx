@@ -1,13 +1,32 @@
+import type { JwtPayload } from "@supabase/supabase-js";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { Button } from "../atoms/ui/button";
+
 export interface HeaderProps {
-  navSection?: ReactNode;
+  hasEnvVars?: boolean;
+  user?: JwtPayload;
   authSection?: ReactNode;
+  navSection?: ReactNode;
+  onLogin?: () => void;
+  onSignup?: () => void;
+  onLogout?: () => void;
 }
 
-export const Header = ({ navSection, authSection }: HeaderProps) => {
+export const Header = ({
+  hasEnvVars,
+  user,
+  authSection,
+  navSection,
+  onLogin,
+  onSignup,
+  onLogout,
+}: HeaderProps) => {
+  const isAuthenticated = !!user;
+
   const renderNavSection = () => {
     if (navSection) {
       return navSection;
@@ -18,7 +37,66 @@ export const Header = ({ navSection, authSection }: HeaderProps) => {
       return authSection;
     }
 
-    return null;
+    if (!hasEnvVars) {
+      return (
+        <div className="flex items-center gap-2 rounded-md border border-yellow-500 bg-yellow-50 px-3 py-2 text-sm text-yellow-800">
+          <span>⚠️ Missing environment variables</span>
+        </div>
+      );
+    }
+
+    if (isAuthenticated) {
+      return (
+        <div className="flex items-center gap-2">
+          <span>Hola, {user?.email}!</span>
+          <Button
+            asChild
+            className=""
+            iconLeft={null}
+            iconRight={<ArrowRight />}
+            onClick={onLogin}
+            size="default"
+            variant="default"
+          >
+            <Link href="/protected">Ir al Panel</Link>
+          </Button>{" "}
+          <Button
+            type="button"
+            onClick={onLogout}
+            className="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-8 items-center justify-center gap-2 rounded-md border px-3 text-xs font-medium whitespace-nowrap shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+          >
+            Sign out
+          </Button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex items-center gap-2">
+        <Button
+          asChild
+          className=""
+          iconLeft={null}
+          iconRight={<ArrowRight />}
+          onClick={onLogin}
+          size="default"
+          variant="default"
+        >
+          <Link href="/auth/login">Iniciar sesión</Link>
+        </Button>{" "}
+        <Button
+          asChild
+          className=""
+          iconLeft={null}
+          iconRight={<ArrowRight />}
+          onClick={onSignup}
+          size="default"
+          variant="default"
+        >
+          <Link href="/auth/sign-up">Registrarse</Link>
+        </Button>
+      </div>
+    );
   };
 
   return (
