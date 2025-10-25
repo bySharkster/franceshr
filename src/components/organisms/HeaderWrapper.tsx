@@ -4,7 +4,6 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { hasEnvVars } from "@/lib/utils";
 
-import { LogoutButton } from "../atoms/buttons/logout-button";
 import { Button } from "../atoms/ui/button";
 import { EnvVarWarning } from "../molecules/env-var-warning";
 import { NavSection } from "../molecules/nav-section";
@@ -29,11 +28,14 @@ export async function HeaderWrapper() {
   ) : user ? (
     <div className="flex items-center gap-4">
       Hola, {user.user_metadata.full_name}!
-      <LogoutButton />
+      <Button asChild size="sm" variant="default" className="hidden md:flex">
+        <Link href="/app">Ir al App</Link>
+      </Button>
+      {/* <LogoutButton /> */}
     </div>
   ) : (
     <div className="flex gap-2">
-      <Button asChild size="sm" variant="outline" className="hidden md:flex">
+      <Button asChild size="sm" variant="ghost" className="hidden md:flex">
         <Link href="/auth/login">Iniciar sesión</Link>
       </Button>
       <Button asChild size="sm" variant="default">

@@ -24,7 +24,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing required params" }, { status: 400 });
     }
 
-    // OPTIONAL: Validate priceId exists in your prices table and is active
     const { data: priceRow, error: priceErr } = await supabase
       .from("prices")
       .select("id, unit_amount, currency, active")

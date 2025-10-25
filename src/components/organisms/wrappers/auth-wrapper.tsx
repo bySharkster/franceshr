@@ -14,7 +14,7 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-svh w-full flex-col items-center justify-center gap-8 p-6 md:p-10">
       <div className="flex w-full max-w-3xl items-center justify-start gap-2">
         <Button iconLeft={<ArrowLeft />} size="sm" variant="default" asChild>
-          <NextLink href="/">Back</NextLink>
+          <NextLink href="/">Volver al inicio</NextLink>
         </Button>
       </div>
       <AnimatePresence mode="popLayout" initial={false}>

@@ -15,6 +15,7 @@ import {
   FieldSeparator,
 } from "@/components/atoms/ui/field";
 import { Input } from "@/components/atoms/ui/input";
+import { useAuthRedirect } from "@/hooks/use-auth-redirect";
 import { cn } from "@/lib/utils";
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
@@ -23,6 +24,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
   const [email, setEmail] = useState<string>("");
   const emailInputRef = useRef<HTMLInputElement>(null);
   const searchParams = useSearchParams();
+  const { forwardingUrl } = useAuthRedirect();
 
   // Restore email from URL params or localStorage
   useEffect(() => {
@@ -63,7 +65,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
 
   const handleOAuthSignIn = (provider: "google" | "apple" | "facebook") => {
     startTransition(async () => {
-      const result = await signInWithOAuth(provider);
+      const result = await signInWithOAuth(provider, forwardingUrl);
       if (result?.error) {
         setError(result.error);
       }

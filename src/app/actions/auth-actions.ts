@@ -62,7 +62,7 @@ export async function signUp(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/protected");
+  redirect("/app");
 }
 
 /**
@@ -93,7 +93,7 @@ export async function signIn(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/protected");
+  redirect("/app");
 }
 
 /**
@@ -103,7 +103,7 @@ export async function signOut() {
   const supabase = await createClient();
   await supabase.auth.signOut();
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect("/auth/login");
 }
 
 /**
@@ -180,13 +180,16 @@ export async function updatePassword(formData: FormData) {
 /**
  * Sign in with OAuth provider (Google, Apple, Meta)
  */
-export async function signInWithOAuth(provider: "google" | "apple" | "facebook") {
+export async function signInWithOAuth(
+  provider: "google" | "apple" | "facebook",
+  next: string | null = "/app",
+) {
   const supabase = await createClient();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
+      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=${next}`,
     },
   });
 

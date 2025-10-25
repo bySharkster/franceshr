@@ -12,24 +12,24 @@ export function Services() {
       title: "Resume Profesional",
       description:
         "Haz que tu resume comunique tu valor real. Diseños modernos, contenido estratégico y redacción optimizada para captar la atención de reclutadores y sistemas automatizados (ATS).",
-      ctaText: "Reserva tu sesión",
-      ctaLink: "#contact",
+      ctaText: "Ver detalles",
+      ctaLink: "/services/resume-profesional",
     },
     {
       icon: Users,
       title: "Mentorías Laborales",
       description:
         "Recibe orientación personalizada para definir objetivos, fortalecer tu marca personal y trazar un plan efectivo de crecimiento profesional.",
-      ctaText: "Reserva tu sesión",
-      ctaLink: "#contact",
+      ctaText: "Ver detalles",
+      ctaLink: "/services/mentorias-laborales",
     },
     {
       icon: MessageSquare,
       title: "Entrevistas Simuladas",
       description:
         "Prepárate con una experta en coaching laboral y reclutamiento. Mejora tus respuestas, lenguaje corporal y seguridad antes de tu próxima entrevista.",
-      ctaText: "Reserva tu sesión",
-      ctaLink: "#contact",
+      ctaText: "Ver detalles",
+      ctaLink: "/services/entrevistas-simuladas",
     },
   ];
 

@@ -79,8 +79,8 @@ export const Header = ({
           iconLeft={null}
           iconRight={<ArrowRight />}
           onClick={onLogin}
-          size="default"
-          variant="default"
+          size="sm"
+          variant="ghost"
         >
           <Link href="/auth/login">Iniciar sesión</Link>
         </Button>{" "}
@@ -105,7 +105,14 @@ export const Header = ({
         {/* Logo */}
         <div className="flex items-center gap-3 font-semibold">
           <Link href="/" className="flex items-center gap-3">
-            <Image src="/logo.svg" alt="Logo" width={32} height={32} />
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={450}
+              height={450}
+              className="h-8 w-8"
+              priority
+            />
             <h1 className="hidden font-sans text-2xl md:flex">FrancesHR</h1>
           </Link>
         </div>
