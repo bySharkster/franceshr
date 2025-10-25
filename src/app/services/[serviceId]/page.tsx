@@ -32,19 +32,12 @@ export default function ServiceDetailPage() {
     }
   };
 
-  const handleBackToPreviousPage = () => {
-    window.history.back();
-  };
-
   return (
     <div className="from-primary to-secondary dark:from-background dark:to-background relative min-h-screen bg-gradient-to-b via-blue-50/30 dark:via-blue-950/10">
       <div className="absolute top-8 left-4 z-50 w-full max-w-3xl items-center justify-start gap-2 pb-8">
-        <Button
-          iconLeft={<ArrowLeft />}
-          size="icon"
-          variant="outline"
-          onClick={handleBackToPreviousPage}
-        />
+        <Button iconLeft={<ArrowLeft />} size="sm" variant="outline" asChild>
+          <Link href="/">Volver</Link>
+        </Button>
       </div>
       {/* Hero Section */}
       <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8">

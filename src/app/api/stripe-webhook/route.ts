@@ -112,7 +112,6 @@ export async function POST(req: Request) {
       case "payment_intent.succeeded": {
         const pi = event.data.object;
         const paymentIntentId = pi.id;
-        const userId = pi.metadata?.userId ?? null;
         const amount = pi.amount ?? null;
         const currency = pi.currency ?? "usd";
 
@@ -127,23 +126,21 @@ export async function POST(req: Request) {
           }
         }
 
-        // Upsert orders if you prefer to rely on payment_intent instead of checkout.session
-        const orderPayload = {
-          user_id: userId,
-          email: pi.receipt_email ?? null,
-          package_slug: pi.metadata?.package_slug ?? "unknown",
+        // Update the existing order that was created by checkout.session.completed
+        // We only update fields that weren't available during checkout completion
+        const updatePayload = {
           stripe_payment_intent_id: paymentIntentId,
           amount,
           currency,
           status: "paid",
-          metadata: { ...pi.metadata, receipt_url: receiptUrl },
-          created_at: new Date().toISOString(),
+          metadata: { receipt_url: receiptUrl },
           updated_at: new Date().toISOString(),
         };
 
         await supabase
           .from("orders")
-          .upsert(orderPayload, { onConflict: "stripe_payment_intent_id" });
+          .update(updatePayload)
+          .eq("stripe_payment_intent_id", paymentIntentId);
 
         // TODO: Send email confirmation
 
