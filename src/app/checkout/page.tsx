@@ -9,6 +9,7 @@ import { Suspense, useEffect, useState } from "react";
 import { SuspenseLoader } from "@/components/atoms/ui/suspense-loader";
 import { getServiceById } from "@/config/services.config";
 import { createClient } from "@/lib/supabase/client";
+import type { ServiceDetails } from "@/types/services.type";
 
 function CheckoutContent() {
   const router = useRouter();
@@ -18,8 +19,7 @@ function CheckoutContent() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
-
-  const service = serviceId ? getServiceById(serviceId) : null;
+  const [service, setService] = useState<ServiceDetails | null>(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -31,6 +31,13 @@ function CheckoutContent() {
     };
     checkAuth();
   }, []);
+
+  useEffect(() => {
+    if (serviceId) {
+      const service = getServiceById(serviceId);
+      setService(service);
+    }
+  }, [serviceId]);
 
   if (!service || !service.stripePriceId) {
     return (
