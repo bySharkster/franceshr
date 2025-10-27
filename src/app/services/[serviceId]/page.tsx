@@ -22,16 +22,6 @@ export default function ServiceDetailPage() {
 
   const Icon = service.icon;
 
-  const handlePurchase = () => {
-    if (service.calComLink) {
-      // Redirect to Cal.com for scheduling
-      window.open(service.calComLink, "_blank");
-    } else if (service.stripePriceId) {
-      // Redirect to checkout page (we'll create this next)
-      window.location.href = `/checkout?service=${service.id}`;
-    }
-  };
-
   return (
     <div className="from-primary to-secondary dark:from-background dark:to-background relative min-h-screen bg-gradient-to-b via-blue-50/30 dark:via-blue-950/10">
       <div className="absolute top-8 left-4 z-50 w-full max-w-3xl items-center justify-start gap-2 pb-8">
@@ -86,18 +76,23 @@ export default function ServiceDetailPage() {
               )}
 
               {/* CTA Button */}
-              <button
+              <Button
                 type="button"
-                onClick={handlePurchase}
+                asChild
                 className="from-primary to-secondary group/btn inline-flex w-fit items-center gap-2 rounded-full bg-linear-to-r px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl"
               >
-                {service.ctaText}
+                <Link
+                  href={service.calComLink || `/checkout?service=${service.id}`}
+                  target={service.calComLink ? "_blank" : "_self"}
+                >
+                  {service.ctaText}
+                </Link>
                 {service.calComLink ? (
                   <ExternalLink className="h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
                 ) : (
                   <ArrowRight className="h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
                 )}
-              </button>
+              </Button>
             </motion.div>
 
             {/* Right Column - Features Card */}
@@ -256,18 +251,23 @@ export default function ServiceDetailPage() {
           <p className="text-foreground/70 mb-8 text-lg">
             Invierte en tu futuro profesional hoy mismo
           </p>
-          <button
+          <Button
             type="button"
-            onClick={handlePurchase}
+            asChild
             className="from-primary to-secondary group/btn inline-flex items-center gap-2 rounded-full bg-linear-to-r px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl"
           >
-            {service.ctaText}
+            <Link
+              href={service.calComLink || `/checkout?service=${service.id}`}
+              target={service.calComLink ? "_blank" : "_self"}
+            >
+              {service.ctaText}
+            </Link>
             {service.calComLink ? (
               <ExternalLink className="h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
             ) : (
               <ArrowRight className="h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
             )}
-          </button>
+          </Button>
 
           <p className="text-foreground/60 mt-6 text-sm">
             <Link href="/#contact" className="hover:text-foreground underline transition-colors">

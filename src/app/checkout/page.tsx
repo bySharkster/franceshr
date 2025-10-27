@@ -71,7 +71,7 @@ function CheckoutContent() {
       const response = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/jsopn",
         },
         body: JSON.stringify({
           userId: currentUser.id,
