@@ -59,3 +59,10 @@ CREATE POLICY "Users can update own profile"
   TO authenticated
   USING (auth.uid() = id)
   WITH CHECK (auth.uid() = id);
+
+
+-- Drop Customers Table
+DROP TABLE IF EXISTS public.customers;
+
+-- Update Users Table to add stripe_customer_id
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS stripe_customer_id TEXT;
