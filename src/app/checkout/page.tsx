@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
+import { SuspenseLoader } from "@/components/atoms/ui/suspense-loader";
 import { getServiceById } from "@/config/services.config";
 import { createClient } from "@/lib/supabase/client";
 
@@ -206,13 +207,7 @@ function CheckoutContent() {
 
 export default function CheckoutPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="flex min-h-screen items-center justify-center">
-          <Loader2 className="text-primary h-8 w-8 animate-spin" />
-        </div>
-      }
-    >
+    <Suspense fallback={<SuspenseLoader />}>
       <CheckoutContent />
     </Suspense>
   );
