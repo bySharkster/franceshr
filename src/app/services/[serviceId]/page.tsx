@@ -86,12 +86,12 @@ export default function ServiceDetailPage() {
                   target={service.calComLink ? "_blank" : "_self"}
                 >
                   {service.ctaText}
+                  {service.calComLink ? (
+                    <ExternalLink className="h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
+                  ) : (
+                    <ArrowRight className="h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
+                  )}
                 </Link>
-                {service.calComLink ? (
-                  <ExternalLink className="h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
-                ) : (
-                  <ArrowRight className="h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
-                )}
               </Button>
             </motion.div>
 
@@ -261,12 +261,12 @@ export default function ServiceDetailPage() {
               target={service.calComLink ? "_blank" : "_self"}
             >
               {service.ctaText}
+              {service.calComLink ? (
+                <ExternalLink className="h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
+              ) : (
+                <ArrowRight className="h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
+              )}
             </Link>
-            {service.calComLink ? (
-              <ExternalLink className="h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
-            ) : (
-              <ArrowRight className="h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
-            )}
           </Button>
 
           <p className="text-foreground/60 mt-6 text-sm">
