@@ -34,12 +34,11 @@ export function Services() {
   ];
 
   return (
-    // biome-ignore lint/correctness/useUniqueElementIds: UNIQUE ID
     <section
       className="relative flex w-full flex-col items-center gap-8 overflow-hidden py-12 sm:gap-10 sm:py-16 md:gap-12 md:py-20 lg:py-24"
       id="services"
       style={{
-        backgroundImage: `url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 2000 1400' xmlns='http:%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cmask id='b' x='0' y='0' width='2000' height='1400'%3E%3Cpath fill='url(%23a)' d='M0 0h2000v1400H0z'%2F%3E%3C%2Fmask%3E%3Cpath fill='%23FFFBEB' d='M0 0h2000v1400H0z'%2F%3E%3Cg mask='url(%23b)' style='transform-origin:center center' fill='%234c4e72' opacity='0.03'%3E%3Ccircle cx='20' cy='20' r='6'%2F%3E%3Ccircle cx='60' cy='20' r='6'%2F%3E%3Ccircle cx='100' cy='20' r='6'%2F%3E%3Ccircle cx='140' cy='20' r='6'%2F%3E%3Ccircle cx='180' cy='20' r='6'%2F%3E%3C%2Fg%3E%3Cdefs%3E%3CradialGradient id='a'%3E%3Cstop offset='0' stop-color='%23fff'%2F%3E%3Cstop offset='1' stop-color='%23fff'%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3C%2Fsvg%3E")`,
+        backgroundImage: `url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 2000 1400' xmlns='http:%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cmask id='b' x='0' y='0' width='2000' height='1400'%3E%3Cpath fill='url(%23a)' d='M0 0h2000v1400H0z'%2F%3E%3C%2Fmask%3E%3Cpath fill=${"var(--color-baseground)"} d='M0 0h2000v1400H0z'%2F%3E%3Cg mask='url(%23b)' style='transform-origin:center center' fill='%234c4e72' opacity='0.03'%3E%3Ccircle cx='20' cy='20' r='6'%2F%3E%3Ccircle cx='60' cy='20' r='6'%2F%3E%3Ccircle cx='100' cy='20' r='6'%2F%3E%3Ccircle cx='140' cy='20' r='6'%2F%3E%3Ccircle cx='180' cy='20' r='6'%2F%3E%3C%2Fg%3E%3Cdefs%3E%3CradialGradient id='a'%3E%3Cstop offset='0' stop-color='%23fff'%2F%3E%3Cstop offset='1' stop-color='%23fff'%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3C%2Fsvg%3E")`,
         backgroundSize: "cover",
         backgroundPosition: "center center",
         backgroundRepeat: "repeat",
@@ -97,7 +96,7 @@ export function Services() {
           </motion.div>
 
           {/* Title */}
-          <h2 className="text-foreground text-3xl leading-tight font-bold tracking-tight sm:text-4xl md:text-5xl">
+          <h2 className="text-foreground tracking-tight/80 text-3xl leading-tight font-bold sm:text-4xl md:text-5xl">
             Nuestros{" "}
             <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Servicios
@@ -105,7 +104,7 @@ export function Services() {
           </h2>
 
           {/* Description */}
-          <p className="text-foreground/80 max-w-3xl sm:text-lg md:text-xl">
+          <p className="text-foreground/60 max-w-3xl sm:text-lg md:text-xl">
             Soluciones personalizadas para impulsar tu carrera profesional y alcanzar tus objetivos
             laborales
           </p>
