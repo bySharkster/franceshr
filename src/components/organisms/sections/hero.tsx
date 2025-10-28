@@ -17,9 +17,32 @@ export function Hero() {
       {/* Background Gradient */}
       <div className="absolute inset-0 -z-10 bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/20 dark:via-indigo-950/20 dark:to-purple-950/20" />
 
-      {/* Decorative Elements */}
-      <div className="absolute -top-10 -left-10 h-32 w-32 rounded-full bg-blue-200/30 blur-3xl sm:-top-16 sm:-left-16 sm:h-48 sm:w-48 md:-top-20 md:-left-20 md:h-64 md:w-64 dark:bg-blue-800/20" />
-      <div className="absolute -right-10 -bottom-10 h-32 w-32 rounded-full bg-purple-200/30 blur-3xl sm:-right-16 sm:-bottom-16 sm:h-48 sm:w-48 md:-right-20 md:-bottom-20 md:h-64 md:w-64 dark:bg-purple-800/20" />
+      {/* Decorative Elements with animation */}
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.4, 0.3],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
+        className="absolute -top-10 -left-10 h-32 w-32 rounded-full bg-blue-200/30 blur-3xl sm:-top-16 sm:-left-16 sm:h-48 sm:w-48 md:-top-20 md:-left-20 md:h-64 md:w-64 dark:bg-blue-800/20"
+      />
+      <motion.div
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.3, 0.35, 0.3],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+          delay: 1,
+        }}
+        className="absolute -right-10 -bottom-10 h-32 w-32 rounded-full bg-purple-200/30 blur-3xl sm:-right-16 sm:-bottom-16 sm:h-48 sm:w-48 md:-right-20 md:-bottom-20 md:h-64 md:w-64 dark:bg-purple-800/20"
+      />
 
       {/* Main Content */}
       <div className="relative z-10 flex w-full max-w-4xl flex-col items-center gap-6 px-4 text-center sm:gap-7 sm:px-6 md:gap-8 lg:px-8">
@@ -68,9 +91,9 @@ export function Hero() {
           {services.map((service) => (
             <div
               key={service.text}
-              className="bg-card flex items-center gap-2 rounded-lg px-3 py-2 shadow-sm sm:px-4"
+              className="bg-card text-card-foreground flex items-center gap-2 rounded-[20px] px-3 py-2 shadow-[8px_8px_16px_hsl(var(--color-muted)/0.2),-8px_-8px_16px_hsl(var(--color-card)/1)] transition-all duration-300 hover:shadow-[10px_10px_20px_hsl(var(--color-muted)/0.25),-10px_-10px_20px_hsl(var(--color-card)/1)] sm:px-4"
             >
-              <service.icon className="h-4 w-4 text-blue-600 sm:h-5 sm:w-5 dark:text-blue-400" />
+              <service.icon className="from-primary to-secondary h-4 w-4 bg-linear-to-br bg-clip-text text-blue-600 sm:h-5 sm:w-5" />
               <span className="text-foreground/70 text-xs font-medium sm:text-sm">
                 {service.text}
               </span>
@@ -143,9 +166,9 @@ export function Hero() {
         ].map((stat) => (
           <div
             key={stat.label}
-            className="border-border/80 bg-card/80 flex flex-col items-center gap-1.5 rounded-xl border p-4 backdrop-blur-sm sm:gap-2 sm:p-6"
+            className="bg-card text-card-foreground flex flex-col items-center gap-1.5 rounded-[30px] p-4 shadow-[15px_15px_40px_hsl(var(--color-muted)/0.25),-15px_-15px_40px_hsl(var(--color-card)/1)] backdrop-blur-sm transition-all duration-300 hover:shadow-[18px_18px_50px_hsl(var(--color-muted)/0.3),-18px_-18px_50px_hsl(var(--color-card)/1)] sm:gap-2 sm:p-6"
           >
-            <div className="text-2xl font-bold text-blue-600 sm:text-3xl dark:text-blue-400">
+            <div className="from-primary to-secondary bg-linear-to-br bg-clip-text text-2xl font-bold text-transparent sm:text-3xl">
               {stat.number}
             </div>
             <div className="text-foreground/60 text-center text-xs font-medium sm:text-sm">

@@ -32,9 +32,34 @@ export function WhyChoose() {
       {/* Background with subtle gradient */}
       <div className="absolute inset-0 -z-10 bg-linear-to-b from-transparent via-indigo-50/30 to-transparent dark:via-indigo-950/10" />
 
-      {/* Decorative blur elements */}
-      <div className="absolute top-10 right-1/4 h-40 w-40 rounded-full bg-purple-200/20 blur-3xl sm:h-56 sm:w-56 md:h-72 md:w-72 dark:bg-purple-800/10" />
-      <div className="absolute bottom-10 left-1/4 h-40 w-40 rounded-full bg-blue-200/20 blur-3xl sm:h-56 sm:w-56 md:h-72 md:w-72 dark:bg-blue-800/10" />
+      {/* Decorative blur elements with animation */}
+      <motion.div
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.2, 0.3, 0.2],
+          x: [0, 20, 0],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
+        className="absolute top-10 right-1/4 h-40 w-40 rounded-full bg-purple-200/20 blur-3xl sm:h-56 sm:w-56 md:h-72 md:w-72 dark:bg-purple-800/10"
+      />
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.28, 0.2],
+          x: [0, -20, 0],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+          delay: 2,
+        }}
+        className="absolute bottom-10 left-1/4 h-40 w-40 rounded-full bg-blue-200/20 blur-3xl sm:h-56 sm:w-56 md:h-72 md:w-72 dark:bg-blue-800/10"
+      />
 
       {/* Content Container */}
       <div className="relative z-10 flex w-full max-w-6xl flex-col items-center gap-8 px-4 sm:gap-10 sm:px-6 md:gap-12 lg:px-8">
@@ -77,18 +102,22 @@ export function WhyChoose() {
               transition={{ duration: 0.6, delay: 0.1 * index }}
               className="group relative"
             >
-              {/* Glassmorphic Card */}
-              <div className="border-border/40 bg-card/80 relative flex items-start gap-4 rounded-2xl border p-6 backdrop-blur-sm transition-all duration-300 hover:shadow-xl sm:gap-6 sm:p-8">
+              {/* Neumorphic Card */}
+              <div className="bg-card text-card-foreground relative flex items-start gap-4 rounded-[50px] p-6 shadow-[20px_20px_60px_hsl(var(--color-muted)/0.3),-20px_-20px_60px_hsl(var(--color-card)/1)] backdrop-blur-sm transition-all duration-500 hover:scale-[1.01] hover:shadow-[25px_25px_70px_hsl(var(--color-muted)/0.4),-25px_-25px_70px_hsl(var(--color-card)/1)] sm:gap-6 sm:p-8">
                 {/* Gradient overlay on hover */}
-                <div className="from-primary/10 via-secondary/10 absolute inset-0 -z-10 rounded-2xl bg-linear-to-br to-pink-50/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-blue-950/20 dark:via-purple-950/20 dark:to-pink-950/20" />
+                <div className="from-primary/5 via-secondary/5 to-accent/5 absolute inset-0 -z-10 rounded-[50px] bg-linear-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
                 {/* Icon */}
-                <div className="from-primary to-secondary shrink-0 rounded-xl bg-linear-to-br p-3 shadow-md">
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 0.5 }}
+                  className="from-primary to-secondary shrink-0 rounded-xl bg-linear-to-br p-3 shadow-md"
+                >
                   <reason.icon
-                    className="text-background h-5 w-5 sm:h-6 sm:w-6"
+                    className="text-primary-foreground h-5 w-5 sm:h-6 sm:w-6"
                     strokeWidth={1.5}
                   />
-                </div>
+                </motion.div>
 
                 {/* Text */}
                 <p className="text-foreground/80 flex-1 leading-relaxed sm:text-lg">

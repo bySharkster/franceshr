@@ -34,13 +34,46 @@ export function Services() {
   ];
 
   return (
-    <section className="relative flex w-full flex-col items-center gap-8 overflow-hidden py-12 sm:gap-10 sm:py-16 md:gap-12 md:py-20 lg:py-24">
-      {/* Background with subtle gradient */}
-      <div className="absolute inset-0 -z-10 bg-linear-to-b from-transparent via-blue-50/30 to-transparent dark:via-blue-950/10" />
+    // biome-ignore lint/correctness/useUniqueElementIds: UNIQUE ID
+    <section
+      className="relative flex w-full flex-col items-center gap-8 overflow-hidden py-12 sm:gap-10 sm:py-16 md:gap-12 md:py-20 lg:py-24"
+      id="services"
+      style={{
+        backgroundImage: `url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 2000 1400' xmlns='http:%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cmask id='b' x='0' y='0' width='2000' height='1400'%3E%3Cpath fill='url(%23a)' d='M0 0h2000v1400H0z'%2F%3E%3C%2Fmask%3E%3Cpath fill='%23FFFBEB' d='M0 0h2000v1400H0z'%2F%3E%3Cg mask='url(%23b)' style='transform-origin:center center' fill='%234c4e72' opacity='0.03'%3E%3Ccircle cx='20' cy='20' r='6'%2F%3E%3Ccircle cx='60' cy='20' r='6'%2F%3E%3Ccircle cx='100' cy='20' r='6'%2F%3E%3Ccircle cx='140' cy='20' r='6'%2F%3E%3Ccircle cx='180' cy='20' r='6'%2F%3E%3C%2Fg%3E%3Cdefs%3E%3CradialGradient id='a'%3E%3Cstop offset='0' stop-color='%23fff'%2F%3E%3Cstop offset='1' stop-color='%23fff'%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3C%2Fsvg%3E")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+        backgroundRepeat: "repeat",
+      }}
+    >
+      {/* Background with subtle gradient overlay */}
+      <div className="absolute inset-0 -z-10 bg-linear-to-b from-transparent via-blue-50/40 to-transparent dark:via-blue-950/20" />
 
-      {/* Decorative blur elements */}
-      <div className="absolute top-20 left-1/3 h-40 w-40 rounded-full bg-blue-200/20 blur-3xl sm:h-56 sm:w-56 md:h-72 md:w-72 dark:bg-blue-800/10" />
-      <div className="absolute right-1/3 bottom-20 h-40 w-40 rounded-full bg-indigo-200/20 blur-3xl sm:h-56 sm:w-56 md:h-72 md:w-72 dark:bg-indigo-800/10" />
+      {/* Decorative blur elements with animation */}
+      <motion.div
+        animate={{
+          scale: [1, 1.25, 1],
+          opacity: [0.15, 0.25, 0.15],
+        }}
+        transition={{
+          duration: 9,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
+        className="absolute top-20 left-1/3 h-40 w-40 rounded-full bg-blue-200/20 blur-3xl sm:h-56 sm:w-56 md:h-72 md:w-72 dark:bg-blue-800/10"
+      />
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.15, 0.3, 0.15],
+        }}
+        transition={{
+          duration: 11,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+          delay: 1.5,
+        }}
+        className="absolute right-1/3 bottom-20 h-40 w-40 rounded-full bg-indigo-200/20 blur-3xl sm:h-56 sm:w-56 md:h-72 md:w-72 dark:bg-indigo-800/10"
+      />
 
       {/* Content Container */}
       <div className="relative z-10 flex w-full max-w-7xl flex-col items-center gap-8 px-4 sm:gap-10 sm:px-6 md:gap-12 lg:px-8">

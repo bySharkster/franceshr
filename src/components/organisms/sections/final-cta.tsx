@@ -10,9 +10,32 @@ export function FinalCTA() {
       {/* Background with strong gradient */}
       <div className="absolute inset-0 -z-10 bg-linear-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-blue-950/30 dark:via-purple-950/30 dark:to-pink-950/30" />
 
-      {/* Decorative blur elements */}
-      <div className="absolute -top-20 -left-20 h-64 w-64 rounded-full bg-blue-300/30 blur-3xl sm:h-80 sm:w-80 md:h-96 md:w-96 dark:bg-blue-700/20" />
-      <div className="absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-purple-300/30 blur-3xl sm:h-80 sm:w-80 md:h-96 md:w-96 dark:bg-purple-700/20" />
+      {/* Decorative blur elements with animation */}
+      <motion.div
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.3, 0.4, 0.3],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
+        className="absolute -top-20 -left-20 h-64 w-64 rounded-full bg-blue-300/30 blur-3xl sm:h-80 sm:w-80 md:h-96 md:w-96 dark:bg-blue-700/20"
+      />
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.35, 0.3],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+          delay: 2,
+        }}
+        className="absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-purple-300/30 blur-3xl sm:h-80 sm:w-80 md:h-96 md:w-96 dark:bg-purple-700/20"
+      />
 
       {/* Content Container */}
       <div className="relative z-10 flex w-full max-w-4xl flex-col items-center gap-8 px-4 text-center sm:gap-10 sm:px-6 md:gap-12 lg:px-8">
@@ -24,7 +47,7 @@ export function FinalCTA() {
           transition={{ duration: 0.5, type: "spring", bounce: 0.4 }}
           className="from-primary to-secondary inline-flex items-center justify-center rounded-3xl bg-linear-to-br p-4 shadow-2xl sm:p-5"
         >
-          <Rocket className="text-background h-8 w-8 sm:h-10 sm:w-10" strokeWidth={1} />
+          <Rocket className="text-primary-foreground h-8 w-8 sm:h-10 sm:w-10" strokeWidth={1} />
         </motion.div>
 
         {/* Main Content */}

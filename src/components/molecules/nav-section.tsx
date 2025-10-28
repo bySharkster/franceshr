@@ -20,7 +20,7 @@ const LinkItems = [
     label: "Inicio",
   },
   {
-    href: "/services",
+    href: "/#services",
     label: "Servicios",
   },
   {

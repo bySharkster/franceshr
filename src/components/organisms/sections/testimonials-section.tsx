@@ -57,9 +57,32 @@ export function TestimonialsSection() {
       {/* Background with subtle gradient */}
       <div className="absolute inset-0 -z-10 bg-linear-to-b from-transparent via-pink-50/30 to-transparent dark:via-pink-950/10" />
 
-      {/* Decorative blur elements */}
-      <div className="absolute top-20 left-1/3 h-40 w-40 rounded-full bg-pink-200/20 blur-3xl sm:h-56 sm:w-56 md:h-72 md:w-72 dark:bg-pink-800/10" />
-      <div className="absolute right-1/3 bottom-20 h-40 w-40 rounded-full bg-purple-200/20 blur-3xl sm:h-56 sm:w-56 md:h-72 md:w-72 dark:bg-purple-800/10" />
+      {/* Decorative blur elements with animation */}
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.3, 0.2],
+        }}
+        transition={{
+          duration: 9,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
+        className="absolute top-20 left-1/3 h-40 w-40 rounded-full bg-pink-200/20 blur-3xl sm:h-56 sm:w-56 md:h-72 md:w-72 dark:bg-pink-800/10"
+      />
+      <motion.div
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.2, 0.25, 0.2],
+        }}
+        transition={{
+          duration: 11,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+          delay: 1.5,
+        }}
+        className="absolute right-1/3 bottom-20 h-40 w-40 rounded-full bg-purple-200/20 blur-3xl sm:h-56 sm:w-56 md:h-72 md:w-72 dark:bg-purple-800/10"
+      />
 
       {/* Content Container */}
       <div className="relative z-10 flex w-full max-w-5xl flex-col items-center gap-8 px-4 sm:gap-10 sm:px-6 md:gap-12 lg:px-8">
@@ -79,7 +102,10 @@ export function TestimonialsSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="from-primary to-secondary inline-flex items-center justify-center rounded-2xl bg-linear-to-br p-3 shadow-lg"
           >
-            <MessageCircle className="text-background h-6 w-6 sm:h-7 sm:w-7" strokeWidth={1} />
+            <MessageCircle
+              className="text-primary-foreground h-6 w-6 sm:h-7 sm:w-7"
+              strokeWidth={1}
+            />
           </motion.div>
 
           {/* Title */}
@@ -122,9 +148,9 @@ export function TestimonialsSection() {
               transition={{ duration: 0.3 }}
               className="w-full"
             >
-              <div className="border-border/40 bg-card/80 group relative overflow-hidden rounded-3xl border p-8 shadow-xl backdrop-blur-sm transition-all duration-300 hover:shadow-2xl sm:p-10 md:p-12">
+              <div className="bg-card text-card-foreground group relative overflow-hidden rounded-[50px] p-8 shadow-[20px_20px_60px_hsl(var(--color-muted)/0.3),-20px_-20px_60px_hsl(var(--color-card)/1)] backdrop-blur-sm transition-all duration-500 hover:shadow-[25px_25px_70px_hsl(var(--color-muted)/0.4),-25px_-25px_70px_hsl(var(--color-card)/1)] sm:p-10 md:p-12">
                 {/* Gradient overlay on hover */}
-                <div className="from-primary/10 via-secondary/10 absolute inset-0 -z-10 bg-linear-to-br to-pink-50/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-blue-950/20 dark:via-purple-950/20 dark:to-pink-950/20" />
+                <div className="from-primary/5 via-secondary/5 to-accent/5 absolute inset-0 -z-10 rounded-[50px] bg-linear-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
                 {/* Quote Icon */}
                 <div className="absolute top-8 right-8 opacity-10 sm:top-10 sm:right-10">

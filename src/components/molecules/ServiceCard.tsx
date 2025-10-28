@@ -29,10 +29,10 @@ export function ServiceCard({
       transition={{ duration: 0.6, delay: 0.1 * index }}
       className="group relative h-full w-full"
     >
-      {/* Card Container - Following specified dimensions */}
-      <div className="bg-card border-border/40 relative flex h-full min-h-[280px] flex-col items-start gap-6 overflow-hidden rounded-lg border p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl sm:min-h-[320px] sm:gap-8 sm:p-8 md:min-h-[380px] md:max-w-[932px]">
+      {/* Neumorphic Card Container */}
+      <div className="bg-card text-card-foreground relative flex h-full min-h-[280px] flex-col items-start gap-6 overflow-hidden rounded-[50px] p-6 shadow-[20px_20px_60px_hsl(var(--color-muted)/0.3),-20px_-20px_60px_hsl(var(--color-card)/1)] backdrop-blur-sm transition-all duration-500 hover:scale-[1.02] hover:shadow-[25px_25px_70px_hsl(var(--color-muted)/0.4),-25px_-25px_70px_hsl(var(--color-card)/1)] sm:min-h-[320px] sm:gap-8 sm:p-8 md:min-h-[380px] md:max-w-[932px]">
         {/* Gradient overlay on hover */}
-        <div className="from-primary/10 via-secondary/10 absolute inset-0 -z-10 bg-linear-to-br to-pink-50/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-blue-950/20 dark:via-purple-950/20 dark:to-pink-950/20" />
+        <div className="from-primary/5 via-secondary/5 to-accent/5 absolute inset-0 -z-10 rounded-[50px] bg-linear-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
         {/* Icon */}
         <motion.div
@@ -40,7 +40,7 @@ export function ServiceCard({
           transition={{ duration: 0.3 }}
           className="from-primary to-secondary inline-flex items-center justify-center rounded-xl bg-linear-to-br p-3 shadow-md sm:p-4"
         >
-          <Icon className="text-background h-6 w-6 sm:h-7 sm:w-7" strokeWidth={1.5} />
+          <Icon className="text-primary-foreground h-6 w-6 sm:h-7 sm:w-7" strokeWidth={1.5} />
         </motion.div>
 
         {/* Content */}
