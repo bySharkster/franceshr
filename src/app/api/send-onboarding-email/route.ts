@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
 
-import { OnboardingEmailClient } from "@/emails/onboarding-client";
-import { OnboardingEmailOwner } from "@/emails/onboarding-owner";
-
-const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
+import { EmailService } from "@/lib/services/email.service";
 
 export async function POST(req: Request) {
   try {
@@ -15,40 +11,23 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const ownerEmail = process.env.NEXT_PUBLIC_EMAIL_TO || "frances@franceshr.com";
-    const fromEmail = process.env.NEXT_PUBLIC_EMAIL_FROM || "noreply@franceshr.com";
-
-    // Send email to owner
-    const ownerEmailResult = await resend.emails.send({
-      from: fromEmail,
-      to: ownerEmail,
-      subject: `Nueva Solicitud de Resume - ${userEmail}`,
-      react: OnboardingEmailOwner({
+    // Send emails using EmailService (with retry logic)
+    await Promise.all([
+      EmailService.sendOnboardingToOwner({
         userEmail,
         userId,
         serviceId,
-        careerGoals: formData.careerGoals,
-        industryPursuing: formData.industryPursuing,
-        relatedExperience: formData.relatedExperience,
-        resumeUrl: formData.resumeUrl,
+        formData: {
+          careerGoals: formData.careerGoals,
+          industryPursuing: formData.industryPursuing,
+          relatedExperience: formData.relatedExperience,
+          resumeUrl: formData.resumeUrl,
+        },
       }),
-    });
+      EmailService.sendOnboardingConfirmation({ email: userEmail }),
+    ]);
 
-    // Send confirmation email to client
-    const clientEmailResult = await resend.emails.send({
-      from: fromEmail,
-      to: userEmail,
-      subject: "Confirmación de Compra - Resume Profesional",
-      react: OnboardingEmailClient({
-        _userEmail: userEmail,
-      }),
-    });
-
-    return NextResponse.json({
-      success: true,
-      ownerEmailId: ownerEmailResult.data?.id,
-      clientEmailId: clientEmailResult.data?.id,
-    });
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Email send error:", error);
     return NextResponse.json(

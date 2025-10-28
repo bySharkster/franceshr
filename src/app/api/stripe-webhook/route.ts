@@ -1,7 +1,7 @@
-// app/api/stripe-webhook/route.js
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 
+import { StripeWebhookService } from "@/lib/services/stripe-webhook.service";
 import { stripeWebhookSecret } from "@/lib/stripe/check-env";
 import stripe from "@/lib/stripe/get-stripe";
 import { createClient } from "@/lib/supabase/service-role-client";
@@ -63,99 +63,39 @@ export async function POST(req: Request) {
   try {
     switch (event.type) {
       case "checkout.session.completed": {
-        const session = event.data.object;
-        // Extract values
-        const userId = session.metadata?.userId ?? null;
-        const package_slug = session.metadata?.package_slug ?? null;
-        const checkoutSessionId = session.id;
-        const paymentIntentId = session.payment_intent ?? null; // mode=payment provides this
-        const amount_total = session.amount_total ?? null; // cents
-        const currency = session.currency ?? "usd";
-        const payment_status = session.payment_status ?? session.status ?? "unknown";
-
-        // Map Stripe statuses to your orders.status check constraint values
-        // Allowed: 'paid', 'requires_action', 'failed', 'refunded'
-        let mappedStatus = "failed";
-        if (payment_status === "paid") mappedStatus = "paid";
-        else if (payment_status === "unpaid") mappedStatus = "failed";
-
-        // Idempotent upsert into orders by stripe_checkout_session_id
-        const orderPayload = {
-          user_id: userId,
-          email: session.customer_details?.email ?? null,
-          package_slug: package_slug ?? "unknown",
-          stripe_checkout_session_id: checkoutSessionId,
-          stripe_payment_intent_id: paymentIntentId,
-          amount: amount_total ?? 0,
-          currency,
-          status: mappedStatus,
-          metadata: session.metadata ?? {},
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-        };
-
-        await supabase
-          .from("orders")
-          .upsert(orderPayload, { onConflict: "stripe_checkout_session_id" });
-
-        // Also ensure customers row exists (id = userId). If no userId, we skip.
-        if (userId && session.customer) {
-          await supabase
-            .from("users")
-            .update({ stripe_customer_id: session.customer })
-            .eq("id", userId);
-        }
-        // Optionally: fulfill order, send confirmation email, etc. Use a job queue or background worker if heavy.
+        const session = event.data.object as Stripe.Checkout.Session;
+        await StripeWebhookService.handleCheckoutCompleted(session);
         break;
       }
 
       case "payment_intent.succeeded": {
-        const pi = event.data.object;
-        const paymentIntentId = pi.id;
-        const amount = pi.amount ?? null;
-        const currency = pi.currency ?? "usd";
-
-        // Get receipt_url from the latest charge if available
-        let receiptUrl: string | null = null;
-        if (pi.latest_charge && typeof pi.latest_charge === "string") {
-          try {
-            const charge = await stripe.charges.retrieve(pi.latest_charge);
-            receiptUrl = charge.receipt_url ?? null;
-          } catch (err) {
-            console.warn("[Webhook] Could not retrieve charge for receipt_url:", err);
-          }
-        }
-
-        // Update the existing order that was created by checkout.session.completed
-        // We only update fields that weren't available during checkout completion
-        const updatePayload = {
-          stripe_payment_intent_id: paymentIntentId,
-          amount,
-          currency,
-          status: "paid",
-          metadata: { receipt_url: receiptUrl },
-          updated_at: new Date().toISOString(),
-        };
-
-        await supabase
-          .from("orders")
-          .update(updatePayload)
-          .eq("stripe_payment_intent_id", paymentIntentId);
-
-        // TODO: Send email confirmation
-
+        const paymentIntent = event.data.object as Stripe.PaymentIntent;
+        await StripeWebhookService.handlePaymentSucceeded(paymentIntent);
         break;
       }
 
-      // Add other events as needed (charge.refunded, charge.dispute.created, etc.)
+      case "payment_intent.payment_failed": {
+        const paymentIntent = event.data.object as Stripe.PaymentIntent;
+        await StripeWebhookService.handlePaymentFailed(paymentIntent);
+        break;
+      }
+
+      case "customer.subscription.created":
+      case "customer.subscription.updated":
+      case "customer.subscription.deleted": {
+        const subscription = event.data.object as Stripe.Subscription;
+        console.log(`[Webhook] Subscription event: ${event.type} - ${subscription.id}`);
+        // Future: Handle subscription events
+        break;
+      }
+
       default:
-        // ignore unhandled events
+        console.log(`[Webhook] Unhandled event type: ${event.type}`);
         break;
     }
   } catch (err: unknown) {
-    console.error("[Webhook] Error handling webhook event:", err);
-    // Return 500 so Stripe will retry; but be careful not to double-process events if you failed halfway.
-    return NextResponse.json({ error: "Webhook processing error" }, { status: 500 });
+    console.error(`[Webhook] Error processing ${event.type}:`, err);
+    return NextResponse.json({ error: "Event processing failed" }, { status: 500 });
   }
 
   // Success
