@@ -10,7 +10,7 @@ import { Suspense, useEffect, useState } from "react";
 import { Button } from "@/components/atoms/ui/button";
 import { getServiceByType } from "@/config/services.config";
 import { createClient } from "@/lib/supabase/client";
-import { Order } from "@/types/orders.types";
+import type { Order } from "@/types/orders.types";
 import type { ServiceDetails, ServiceType } from "@/types/services.type";
 
 interface OnboardingFormData {
@@ -190,33 +190,15 @@ function OnboardingContent() {
     try {
       const supabase = createClient();
 
-      // Upload resume to Supabase Storage if provided
+      // Upload resume if provided
       let resumeUrl = null;
       if (formData.currentResume) {
         setUploadProgress(30);
 
-        // Get user's full name from metadata or email
-        const { data: userData } = await supabase
-          .from("users")
-          .select("full_name")
-          .eq("id", user.id)
-          .single();
+        const fileExt = formData.currentResume.name.split(".").pop();
+        const filePath = `${user.id}/resume_${Date.now()}.${fileExt}`;
 
-        const fullName = userData?.full_name || user.email?.split("@")[0] || "user";
-        // Sanitize full name for filename (remove spaces and special chars)
-        const sanitizedName = fullName
-          .toLowerCase()
-          .replace(/\s+/g, "_")
-          .replace(/[^a-z0-9_]/g, "");
-
-        // Get file extension
-        const fileExtension = formData.currentResume.name.split(".").pop();
-
-        // Create folder structure: user_id/resume_fullname.ext
-        const filePath = `${user.id}/resume_${sanitizedName}.${fileExtension}`;
-
-        // Upload file (will create folder if it doesn't exist)
-        const { data: _uploadData, error: uploadError } = await supabase.storage
+        const { error: uploadError } = await supabase.storage
           .from("resumes")
           .upload(filePath, formData.currentResume, {
             upsert: true, // Overwrite if file already exists
@@ -226,11 +208,14 @@ function OnboardingContent() {
 
         setUploadProgress(60);
 
-        // Get public URL
-        const {
-          data: { publicUrl },
-        } = supabase.storage.from("resumes").getPublicUrl(filePath);
-        resumeUrl = publicUrl;
+        // Get long-lived signed URL for email (valid for 30 days)
+        const { data, error: signError } = await supabase.storage
+          .from("resumes")
+          .createSignedUrl(filePath, 2592000); // 30 days
+
+        if (signError) throw signError;
+
+        resumeUrl = data.signedUrl;
       }
 
       setUploadProgress(80);
