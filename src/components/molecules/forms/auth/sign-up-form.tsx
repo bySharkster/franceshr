@@ -1,11 +1,13 @@
 "use client";
 
+import { PopcornIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useId, useRef, useState, useTransition } from "react";
 
 import { signInWithOAuth, signUp } from "@/app/actions/auth-actions";
+import { Alert, AlertTitle } from "@/components/atoms/ui/alert";
 import { Button } from "@/components/atoms/ui/button";
 import { Card, CardContent } from "@/components/atoms/ui/card";
 import {
@@ -26,7 +28,7 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
   const [email, setEmail] = useState<string>("");
   const emailInputRef = useRef<HTMLInputElement>(null);
   const searchParams = useSearchParams();
-  const { forwardingUrl } = useAuthRedirect();
+  const { forwardingUrl, next, service } = useAuthRedirect();
 
   // Restore email from URL params or localStorage
   useEffect(() => {
@@ -78,6 +80,18 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
+      {next && service && (
+        <Alert variant="warning">
+          <PopcornIcon />
+          <AlertTitle>
+            Please{" "}
+            <Link href={`/auth/login?service=${service}&next=${next}`} className="underline">
+              login
+            </Link>{" "}
+            or register to continue
+          </AlertTitle>
+        </Alert>
+      )}
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
           <form className="p-6 md:p-8" action={handleSubmit}>
@@ -201,7 +215,11 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
               <FieldDescription className="text-center">
                 ¿Ya tienes una cuenta?{" "}
                 <Link
-                  href={email ? `/auth/login?email=${encodeURIComponent(email)}` : "/auth/login"}
+                  href={
+                    email
+                      ? `/auth/login?email=${encodeURIComponent(email)}&service=${service}&next=${next}`
+                      : "/auth/login"
+                  }
                 >
                   Inicia sesión
                 </Link>

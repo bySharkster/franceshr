@@ -1,10 +1,12 @@
 "use client";
+import { PopcornIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useId, useRef, useState, useTransition } from "react";
 
 import { signIn, signInWithOAuth } from "@/app/actions/auth-actions";
+import { Alert, AlertTitle } from "@/components/atoms/ui/alert";
 import { Button } from "@/components/atoms/ui/button";
 import { Card, CardContent } from "@/components/atoms/ui/card";
 import {
@@ -24,7 +26,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
   const [email, setEmail] = useState<string>("");
   const emailInputRef = useRef<HTMLInputElement>(null);
   const searchParams = useSearchParams();
-  const { forwardingUrl } = useAuthRedirect();
+  const { forwardingUrl, next, service } = useAuthRedirect();
 
   // Restore email from URL params or localStorage
   useEffect(() => {
@@ -74,6 +76,18 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
+      {next && service && (
+        <Alert variant="warning">
+          <PopcornIcon />
+          <AlertTitle>
+            Please login or{" "}
+            <Link href={`/auth/sign-up?service=${service}&next=${next}`} className="underline">
+              register
+            </Link>{" "}
+            to continue
+          </AlertTitle>
+        </Alert>
+      )}
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
           <form className="p-6 md:p-8" action={handleSubmit}>
@@ -171,7 +185,9 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                 No tienes una cuenta?{" "}
                 <Link
                   href={
-                    email ? `/auth/sign-up?email=${encodeURIComponent(email)}` : "/auth/sign-up"
+                    email
+                      ? `/auth/sign-up?email=${encodeURIComponent(email)}&service=${service}&next=${next}`
+                      : "/auth/sign-up"
                   }
                 >
                   Regístrate

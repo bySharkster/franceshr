@@ -2,6 +2,7 @@
 
 import type { User } from "@supabase/supabase-js";
 import {
+  ArrowRight,
   CheckCircle,
   Clock,
   FileText,
@@ -14,28 +15,11 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/atoms/ui/button";
+import { useScrollToFocus } from "@/hooks/useScrollToFocus";
 import { createClient } from "@/lib/supabase/client";
+import type { OnboardingData, Order } from "@/types/orders.types";
 
 import { signOut } from "../actions/auth-actions";
-
-interface Order {
-  id: string;
-  package_slug: string;
-  status: string;
-  created_at: string;
-  amount: number;
-  currency: string;
-}
-
-interface OnboardingData {
-  id: string;
-  service_id: string;
-  career_goals: string;
-  industry_pursuing: string;
-  related_experience: string;
-  resume_url: string | null;
-  created_at: string;
-}
 
 export default function AppPage() {
   const router = useRouter();
@@ -43,6 +27,8 @@ export default function AppPage() {
   const [user, setUser] = useState<User | null>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [onboardingData, setOnboardingData] = useState<OnboardingData[]>([]);
+
+  const { scrollToElement: scrollToOnboarding, registerRef } = useScrollToFocus();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -138,13 +124,22 @@ export default function AppPage() {
     );
   };
 
+  const findServiceNameById = (id: string) => {
+    console.log(id);
+    console.log(orders);
+    const service = orders.find((o) => o.id === id);
+    console.log(service);
+    if (!service) return "";
+    return getServiceName(service.package_slug);
+  };
+
   return (
     <div className="from-background to-background dark:from-background dark:to-background min-h-screen bg-linear-to-b via-blue-50/30 px-4 py-8 sm:px-6 lg:px-8 dark:via-blue-950/10">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h1 className="text-foreground text-3xl font-bold sm:text-4xl">Mi Dashboard</h1>
+            <h1 className="text-foreground text-3xl font-bold sm:text-4xl">Mi Espacio </h1>
             <p className="text-foreground/60 mt-2">Bienvenido, {user?.email}</p>
           </div>
           <Button
@@ -169,7 +164,7 @@ export default function AppPage() {
               <div>
                 <p className="text-foreground/60 text-sm">Servicios Activos</p>
                 <p className="text-foreground text-2xl font-bold">
-                  {orders.filter((o) => o.status === "paid").length}
+                  {orders.filter((o) => o.status === "paid" || o.status === "pending").length}
                 </p>
               </div>
             </div>
@@ -182,7 +177,9 @@ export default function AppPage() {
               </div>
               <div>
                 <p className="text-foreground/60 text-sm">Completados</p>
-                <p className="text-foreground text-2xl font-bold">0</p>
+                <p className="text-foreground text-2xl font-bold">
+                  {orders.filter((o) => o.status === "completed").length}
+                </p>
               </div>
             </div>
           </div>
@@ -195,7 +192,7 @@ export default function AppPage() {
               <div>
                 <p className="text-foreground/60 text-sm">En Progreso</p>
                 <p className="text-foreground text-2xl font-bold">
-                  {orders.filter((o) => o.status === "paid").length}
+                  {orders.filter((o) => o.status === "pending").length}
                 </p>
               </div>
             </div>
@@ -245,13 +242,20 @@ export default function AppPage() {
                       </p>
                     </div>
                     {order.package_slug === "resume-profesional" && order.status === "paid" && (
-                      <button
+                      <Button
                         type="button"
-                        onClick={() => router.push(`/onboarding?service=${order.package_slug}`)}
-                        className="from-primary to-secondary inline-flex items-center gap-2 rounded-full bg-linear-to-r px-6 py-2 text-sm font-semibold text-white"
+                        iconRight={<ArrowRight />}
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          const onboarding = onboardingData.find(
+                            (data) => data.order_id === order.id,
+                          );
+                          if (onboarding) scrollToOnboarding(onboarding.id);
+                        }}
                       >
                         Ver Detalles
-                      </button>
+                      </Button>
                     )}
                   </div>
                 </div>
@@ -268,12 +272,13 @@ export default function AppPage() {
               {onboardingData.map((data) => (
                 <div
                   key={data.id}
+                  ref={registerRef(data.id)}
                   className="border-border/40 bg-card/80 rounded-2xl border p-6 shadow-lg backdrop-blur-sm"
                 >
                   <div className="mb-4 flex items-center gap-3">
-                    <Upload className="from-primary to-secondary h-5 w-5 bg-linear-to-br bg-clip-text text-transparent" />
+                    <Upload className="h-5 w-5" />
                     <h3 className="text-foreground text-lg font-semibold">
-                      {getServiceName(data.service_id)}
+                      {findServiceNameById(data.order_id)} | {data.id}
                     </h3>
                   </div>
                   <div className="space-y-3 text-sm">

@@ -8,7 +8,8 @@ export interface ServiceFAQ {
 }
 
 export interface ServiceDetails {
-  id: ServiceType;
+  id: string;
+  serviceType: ServiceType;
   icon: LucideIcon;
   title: string;
   shortDescription: string;

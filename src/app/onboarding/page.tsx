@@ -3,11 +3,15 @@
 
 import type { User } from "@supabase/supabase-js";
 import { ArrowRight, CheckCircle, Loader2, Upload } from "lucide-react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
-import { getServiceById } from "@/config/services.config";
+import { Button } from "@/components/atoms/ui/button";
+import { getServiceByType } from "@/config/services.config";
 import { createClient } from "@/lib/supabase/client";
+import { Order } from "@/types/orders.types";
+import type { ServiceDetails, ServiceType } from "@/types/services.type";
 
 interface OnboardingFormData {
   careerGoals: string;
@@ -19,7 +23,8 @@ interface OnboardingFormData {
 function OnboardingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const serviceId = searchParams.get("service");
+  const serviceType = searchParams.get("service");
+  const sessionId = searchParams.get("session_id");
 
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
@@ -31,8 +36,11 @@ function OnboardingContent() {
   });
   const [uploadProgress, setUploadProgress] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [verifyingPayment, setVerifyingPayment] = useState(true);
+  const [order, setOrder] = useState<Order | null>(null);
 
-  const service = serviceId ? getServiceById(serviceId) : null;
+  // TODO this can be a hook @checkout uses to
+  const [service, setService] = useState<ServiceDetails | null>(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -48,58 +56,106 @@ function OnboardingContent() {
 
       setUser(currentUser);
 
-      // Check if user has purchased this service
-      const { data: orders } = await supabase
-        .from("orders")
-        .select("*")
-        .eq("user_id", currentUser.id)
-        .eq("package_slug", serviceId)
-        .eq("status", "paid")
-        .single();
+      // If coming from checkout with session_id, poll for order creation
+      if (sessionId) {
+        let attempts = 0;
+        const maxAttempts = 20; // Poll for up to 20 seconds
+        const pollInterval = 1000; // Check every second
 
-      if (!orders) {
-        router.push(`/services/${serviceId}`);
+        const pollForOrder = async () => {
+          const { data: order } = await supabase
+            .from("orders")
+            .select("*")
+            .eq("user_id", currentUser.id)
+            .eq("package_slug", serviceType)
+            .eq("status", "paid")
+            .order("created_at", { ascending: false })
+            .limit(1)
+            .single();
+
+          if (order) {
+            console.log("Order found:", order);
+            setOrder(order);
+            setVerifyingPayment(false);
+            return true;
+          }
+
+          attempts++;
+          if (attempts >= maxAttempts) {
+            console.log("Max polling attempts reached, order not found");
+            // Still allow access - webhook might be delayed
+            setOrder(null);
+            setVerifyingPayment(false);
+            return false;
+          }
+
+          // Continue polling
+          await new Promise((resolve) => setTimeout(resolve, pollInterval));
+          return pollForOrder();
+        };
+
+        await pollForOrder();
+      } else {
+        // No session_id, check if order exists (returning user)
+        const { data: order } = await supabase
+          .from("orders")
+          .select("*")
+          .eq("user_id", currentUser.id)
+          .eq("package_slug", serviceType)
+          .eq("status", "paid")
+          .order("created_at", { ascending: false })
+          .limit(1)
+          .single();
+
+        if (!order) {
+          console.log("No orders found, redirecting to service page");
+          router.push(`/services/${serviceType}`);
+          return;
+        }
+
+        console.log("Existing order found:", order);
+        setOrder(order);
+        setVerifyingPayment(false);
       }
     };
 
-    if (serviceId) {
+    if (serviceType) {
       checkAuth();
     }
-  }, [serviceId, router]);
+  }, [serviceType, sessionId, router]);
 
-  if (!service || service.id !== "resume-profesional") {
-    return (
-      <div className="flex min-h-screen items-center justify-center px-4">
-        <div className="text-center">
-          <h1 className="text-foreground mb-4 text-2xl font-bold">
-            Este servicio no requiere onboarding
-          </h1>
-          <button
-            type="button"
-            onClick={() => router.push("/app")}
-            className="from-primary to-secondary inline-flex items-center gap-2 rounded-full bg-linear-to-r px-6 py-3 text-white"
-          >
-            Ir al Dashboard
-            <ArrowRight className="h-5 w-5" />
-          </button>
-        </div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (serviceType) {
+      const service = getServiceByType(serviceType as ServiceType);
+      setService(service);
+    }
+  }, [serviceType]);
 
   if (!user) {
     return (
       <div className="flex min-h-screen items-center justify-center px-4">
         <div className="text-center">
           <h1 className="text-foreground mb-4 text-2xl font-bold">Por favor inicia sesión</h1>
-          <button
+          <Button
             type="button"
-            onClick={() => router.push("/auth/login")}
+            asChild
+            iconRight={<ArrowRight className="h-5 w-5" />}
             className="from-primary to-secondary inline-flex items-center gap-2 rounded-full bg-linear-to-r px-6 py-3 text-white"
           >
-            Iniciar Sesión
-            <ArrowRight className="h-5 w-5" />
-          </button>
+            <Link href="/auth/login">Iniciar Sesión</Link>
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  if (verifyingPayment) {
+    return (
+      <div className="flex min-h-screen items-center justify-center px-4">
+        <div className="text-center">
+          <Loader2 className="text-primary mx-auto mb-4 h-12 w-12 animate-spin" />
+          <h1 className="text-foreground mb-2 text-2xl font-bold">Verificando tu compra...</h1>
+          <p className="text-foreground/60">Esto puede tomar unos segundos</p>
         </div>
       </div>
     );
@@ -138,11 +194,33 @@ function OnboardingContent() {
       let resumeUrl = null;
       if (formData.currentResume) {
         setUploadProgress(30);
-        const fileName = `${user.id}/${Date.now()}_${formData.currentResume.name}`;
-        // TODO: Handle file upload error
+
+        // Get user's full name from metadata or email
+        const { data: userData } = await supabase
+          .from("users")
+          .select("full_name")
+          .eq("id", user.id)
+          .single();
+
+        const fullName = userData?.full_name || user.email?.split("@")[0] || "user";
+        // Sanitize full name for filename (remove spaces and special chars)
+        const sanitizedName = fullName
+          .toLowerCase()
+          .replace(/\s+/g, "_")
+          .replace(/[^a-z0-9_]/g, "");
+
+        // Get file extension
+        const fileExtension = formData.currentResume.name.split(".").pop();
+
+        // Create folder structure: user_id/resume_fullname.ext
+        const filePath = `${user.id}/resume_${sanitizedName}.${fileExtension}`;
+
+        // Upload file (will create folder if it doesn't exist)
         const { data: _uploadData, error: uploadError } = await supabase.storage
           .from("resumes")
-          .upload(fileName, formData.currentResume);
+          .upload(filePath, formData.currentResume, {
+            upsert: true, // Overwrite if file already exists
+          });
 
         if (uploadError) throw uploadError;
 
@@ -151,20 +229,27 @@ function OnboardingContent() {
         // Get public URL
         const {
           data: { publicUrl },
-        } = supabase.storage.from("resumes").getPublicUrl(fileName);
+        } = supabase.storage.from("resumes").getPublicUrl(filePath);
         resumeUrl = publicUrl;
       }
 
       setUploadProgress(80);
 
+      if (!service) throw new Error("Service not found");
+      if (!order) throw new Error("Order not found");
+
       // Save onboarding data to database
+      // TODO: Use service.id instead of hardcoding
+      // TODO: align service.id with the one in the database
       const { error: dbError } = await supabase.from("onboarding_data").insert({
         user_id: user.id,
         service_id: service.id,
+        order_id: order.id,
         career_goals: formData.careerGoals,
         industry_pursuing: formData.industryPursuing,
         related_experience: formData.relatedExperience,
         resume_url: resumeUrl,
+
         created_at: new Date().toISOString(),
       });
 
@@ -247,7 +332,8 @@ function OnboardingContent() {
               htmlFor="careerGoals"
               className="text-foreground mb-2 block text-sm font-semibold"
             >
-              Objetivos Profesionales *
+              Objetivos Profesionales
+              <span className="text-red-500/60">&nbsp;*</span>
             </label>
             <textarea
               id="careerGoals"
@@ -266,7 +352,8 @@ function OnboardingContent() {
               htmlFor="industryPursuing"
               className="text-foreground mb-2 block text-sm font-semibold"
             >
-              Industria o Sector *
+              Industria o Sector
+              <span className="text-red-500/60">&nbsp;*</span>
             </label>
             <input
               id="industryPursuing"
@@ -285,7 +372,8 @@ function OnboardingContent() {
               htmlFor="relatedExperience"
               className="text-foreground mb-2 block text-sm font-semibold"
             >
-              Experiencia Relevante *
+              Experiencia Relevante
+              <span className="text-red-500/60">&nbsp;*</span>
             </label>
             <textarea
               id="relatedExperience"
@@ -345,7 +433,7 @@ function OnboardingContent() {
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || !service || !order}
             className="from-primary to-secondary flex w-full items-center justify-center gap-2 rounded-full bg-linear-to-r px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? (

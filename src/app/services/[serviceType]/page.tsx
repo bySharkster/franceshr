@@ -7,12 +7,14 @@ import { notFound, useParams } from "next/navigation";
 import { useState } from "react";
 
 import { Button } from "@/components/atoms/ui/button";
-import { getServiceById } from "@/config/services.config";
+import { getServiceByType } from "@/config/services.config";
+import type { ServiceType } from "@/types/services.type";
 
 export default function ServiceDetailPage() {
   const params = useParams();
-  const serviceId = params.serviceId as string;
-  const service = getServiceById(serviceId);
+  const serviceType = params.serviceType as ServiceType;
+  const service = getServiceByType(serviceType);
+  const checkoutUrl = `/checkout?service=${serviceType}`;
 
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
@@ -82,7 +84,7 @@ export default function ServiceDetailPage() {
                 className="from-primary to-secondary group/btn inline-flex w-fit items-center gap-2 rounded-full bg-linear-to-r px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl"
               >
                 <Link
-                  href={service.calComLink || `/checkout?service=${service.id}`}
+                  href={service.calComLink || checkoutUrl}
                   target={service.calComLink ? "_blank" : "_self"}
                 >
                   {service.ctaText}
@@ -257,7 +259,7 @@ export default function ServiceDetailPage() {
             className="from-primary to-secondary group/btn inline-flex items-center gap-2 rounded-full bg-linear-to-r px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl"
           >
             <Link
-              href={service.calComLink || `/checkout?service=${service.id}`}
+              href={service.calComLink || checkoutUrl}
               target={service.calComLink ? "_blank" : "_self"}
             >
               {service.ctaText}

@@ -1,10 +1,13 @@
 import { Briefcase, MessageSquare, Users } from "lucide-react";
 
-import type { ServiceDetails } from "@/types/services.type";
+import type { ServiceDetails, ServiceType } from "@/types/services.type";
 
+// TODO: Align service.id with the one in the database this is the id from stripe
+// TODO: Later on this can be in the database as a table.
 export const SERVICES_DATA: Record<string, ServiceDetails> = {
   "resume-profesional": {
-    id: "resume-profesional",
+    id: "prod_TGzX9thAYYjRkc",
+    serviceType: "resume-profesional",
     icon: Briefcase,
     title: "Resume Profesional",
     shortDescription:
@@ -19,7 +22,7 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
       "Revisiones ilimitadas hasta tu satisfacción",
       "Entrega en formato PDF y Word editable",
     ],
-    price: 75,
+    price: 20,
     currency: "USD",
     stripePriceId: process.env.NEXT_PUBLIC_STRIPE_RESUME_PRICE_ID || null,
     calComLink: null,
@@ -61,7 +64,8 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
     ],
   },
   "mentorias-laborales": {
-    id: "mentorias-laborales",
+    id: "prod_",
+    serviceType: "mentorias-laborales",
     icon: Users,
     title: "Mentorías Laborales",
     shortDescription:
@@ -110,7 +114,8 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
     ],
   },
   "entrevistas-simuladas": {
-    id: "entrevistas-simuladas",
+    id: "prod_",
+    serviceType: "entrevistas-simuladas",
     icon: MessageSquare,
     title: "Entrevistas Simuladas",
     shortDescription:
@@ -166,4 +171,10 @@ export const getServiceById = (id: string): ServiceDetails | null => {
 
 export const getAllServices = (): ServiceDetails[] => {
   return Object.values(SERVICES_DATA);
+};
+
+export const getServiceByType = (serviceType: ServiceType): ServiceDetails | null => {
+  return (
+    Object.values(SERVICES_DATA).find((service) => service.serviceType === serviceType) || null
+  );
 };

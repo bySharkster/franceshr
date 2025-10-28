@@ -32,7 +32,7 @@ Deno.serve(async (req) => {
   try {
     const body = await req.text();
     const sig = req.headers.get("Stripe-Signature") ?? req.headers.get("stripe-signature") ?? "";
-    let event;
+    let event: Stripe.Event | null = null;
     try {
       event = await stripe.webhooks.constructEventAsync(
         body,

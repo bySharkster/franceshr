@@ -7,18 +7,19 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
 import { SuspenseLoader } from "@/components/atoms/ui/suspense-loader";
-import { getServiceById } from "@/config/services.config";
+import { getServiceByType } from "@/config/services.config";
 import { createClient } from "@/lib/supabase/client";
-import type { ServiceDetails } from "@/types/services.type";
+import type { ServiceDetails, ServiceType } from "@/types/services.type";
 
 function CheckoutContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const serviceId = searchParams.get("service");
+  const serviceType = searchParams.get("service");
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
+  // TODO this can be a hook @onboarding uses to
   const [service, setService] = useState<ServiceDetails | null>(null);
 
   useEffect(() => {
@@ -33,11 +34,11 @@ function CheckoutContent() {
   }, []);
 
   useEffect(() => {
-    if (serviceId) {
-      const service = getServiceById(serviceId);
+    if (serviceType) {
+      const service = getServiceByType(serviceType as ServiceType);
       setService(service);
     }
-  }, [serviceId]);
+  }, [serviceType]);
 
   if (!service || !service.stripePriceId) {
     return (
@@ -70,7 +71,7 @@ function CheckoutContent() {
 
       if (!currentUser) {
         // Redirect to login with return URL
-        const returnUrl = `/checkout?service=${serviceId}`;
+        const returnUrl = `/checkout?service=${serviceType}`;
         router.push(`/auth/login?next=${encodeURIComponent(returnUrl)}`);
         return;
       }
@@ -84,8 +85,8 @@ function CheckoutContent() {
         body: JSON.stringify({
           userId: currentUser.id,
           priceId: service.stripePriceId,
-          package_slug: service.id,
-          successUrl: `${window.location.origin}/onboarding?service=${service.id}`,
+          package_slug: service.serviceType,
+          successUrl: `${window.location.origin}/onboarding?service=${serviceType}&session_id={CHECKOUT_SESSION_ID}`,
           cancelUrl: `${window.location.origin}/services/${service.id}`,
         }),
       });
@@ -116,7 +117,7 @@ function CheckoutContent() {
       <div className="mx-auto max-w-2xl">
         {/* Back Button */}
         <Link
-          href={`/services/${service.id}`}
+          href={`/services/${serviceType}`}
           className="text-foreground/60 hover:text-foreground mb-8 inline-flex items-center gap-2 transition-colors"
         >
           <ArrowLeft className="h-5 w-5" />
