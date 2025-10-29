@@ -109,7 +109,7 @@ export function Hero() {
           className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4"
         >
           <Link
-            href="#contact"
+            href="/auth/sign-up"
             className="group inline-flex items-center justify-center gap-2 rounded-lg bg-linear-to-r from-blue-600 to-purple-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl sm:px-8 sm:py-4 sm:text-base"
           >
             Comienza Ahora
