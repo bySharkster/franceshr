@@ -1,5 +1,5 @@
 "use client";
-import { ArrowLeft,FileQuestion, Home } from "lucide-react";
+import { ArrowLeft, FileQuestion, Home } from "lucide-react";
 import Link from "next/link";
 
 export default function NotFound() {

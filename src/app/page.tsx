@@ -3,7 +3,6 @@ import { About } from "@/components/organisms/sections/about";
 // import { Contact } from "@/components/organisms/sections/contact";
 // import { FAQ } from "@/components/organisms/sections/faq";
 import { FinalCTA } from "@/components/organisms/sections/final-cta";
-import { Footer } from "@/components/organisms/sections/footer";
 import { Hero } from "@/components/organisms/sections/hero";
 // import { HowItWorks } from "@/components/organisms/sections/how-it-works";
 // import { Pricing } from "@/components/organisms/sections/pricing";
@@ -13,31 +12,38 @@ import { WhyChoose } from "@/components/organisms/sections/why-choose";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center">
-      <div className="w-full flex-1 flex-col items-center pb-20">
-        {/* Navbar */}
-        <HeaderWrapper />
-        {/* Main Content */}
-        <div className="flex flex-1 flex-col">
-          {/* Hero */}
-          <Hero />
-
-          {/* Main Steps */}
-          <main className="flex flex-1 flex-col">
-            <About />
-            <Services />
-            <WhyChoose />
-            <TestimonialsSection />
-            <FinalCTA />
-            {/* <HowItWorks /> or <CoreValues/> */}
-            {/* <FAQ /> or <Questions/> */}
-            {/* <Pricing /> or <Blog/> or <News/> */}
-            {/* <Contact /> */}
-          </main>
+    <div className="flex min-h-screen w-full flex-col items-center">
+      {/* Navbar */}
+      <HeaderWrapper />
+      {/* Main Content */}
+      <div className="relative flex w-full flex-1 flex-col">
+        <div
+          className="bg-background absolute inset-0 -z-10 h-full w-full"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, var(--color-grid) 1px, transparent 1px), linear-gradient(to bottom, var(--color-grid) 1px, transparent 1px)",
+            backgroundSize: "6rem 4rem",
+          }}
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_100%_200px,hsl(var(--primary)/0.15),transparent)]"></div>
         </div>
-        {/* Footer */}
-        <Footer />
+
+        {/* Hero */}
+        <Hero />
+
+        {/* Main Steps */}
+        <div className="flex flex-1 flex-col">
+          <About />
+          <Services />
+          <WhyChoose />
+          <TestimonialsSection />
+          <FinalCTA />
+          {/* <HowItWorks /> or <CoreValues/> */}
+          {/* <FAQ /> or <Questions/> */}
+          {/* <Pricing /> or <Blog/> or <News/> */}
+          {/* <Contact /> */}
+        </div>
       </div>
-    </main>
+    </div>
   );
 }

@@ -1,10 +1,21 @@
 import type { LucideIcon } from "lucide-react";
 
-export type ServiceType = "resume-profesional" | "mentorias-laborales" | "entrevistas-simuladas";
+export type ServiceType =
+  | "resume-basico"
+  | "resume-profesional"
+  | "resume-ejecutivo"
+  | "mentorias-laborales"
+  | "entrevistas-simuladas";
 
 export interface ServiceFAQ {
   question: string;
   answer: string;
+}
+
+export interface RelatedService {
+  type: ServiceType;
+  title: string;
+  description: string;
 }
 
 export interface ServiceDetails {
@@ -23,4 +34,5 @@ export interface ServiceDetails {
   ctaText: string;
   deliveryTime?: string;
   includes?: string[];
+  relatedServices?: RelatedService[];
 }

@@ -1,70 +1,49 @@
-import { Facebook, Instagram, Linkedin } from "lucide-react";
+import { Mail, MapPin, Shield } from "lucide-react";
 import Link from "next/link";
 
-import { ThemeSwitcher } from "@/components/molecules/theme-switcher";
-
 export function Footer() {
-  return (
-    <footer className="bg-background border-t">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
-          {/* Brand Section */}
-          <div className="md:col-span-1">
-            <h3 className="text-foreground text-lg font-bold">FrancesHR</h3>
-            <p className="text-foreground/60 mt-2 text-sm">
-              Servicios profesionales de recursos humanos para impulsar tu carrera.
-            </p>
-          </div>
+  const currentYear = new Date().getFullYear();
 
-          {/* Quick Links */}
+  return (
+    <footer className="bg-background">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {/* Company Info */}
           <div>
-            <h4 className="text-foreground text-sm font-semibold">Enlaces Rápidos</h4>
-            <ul className="mt-4 space-y-2">
-              <li>
-                <Link href="/" className="text-foreground/60 hover:text-foreground text-sm">
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#services"
-                  className="text-foreground/60 hover:text-foreground text-sm"
-                >
-                  Servicios
-                </Link>
-              </li>
-              <li>
-                <Link href="/app" className="text-foreground/60 hover:text-foreground text-sm">
-                  Mi Dashboard
-                </Link>
-              </li>
-            </ul>
+            <h3 className="text-text mb-4 text-lg font-semibold">FrancesHR</h3>
+            <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+              Soluciones profesionales de recursos humanos para impulsar tu carrera.
+            </p>
+            <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
+              <span>Puerto Rico & United States</span>
+            </div>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="text-foreground text-sm font-semibold">Servicios</h4>
-            <ul className="mt-4 space-y-2">
+            <h3 className="text-text mb-4 text-lg font-semibold">Servicios</h3>
+            <ul className="space-y-2 text-sm">
               <li>
                 <Link
-                  href="/#services"
-                  className="text-foreground/60 hover:text-foreground text-sm"
+                  href="/services/resume-profesional"
+                  className="text-text transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
                 >
-                  Resume Profesional
+                  Optimización de CV
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/#services"
-                  className="text-foreground/60 hover:text-foreground text-sm"
+                  href="/services/mentorias-laborales"
+                  className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
                 >
-                  Mentorías Laborales
+                  Mentorias Laborales
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/#services"
-                  className="text-foreground/60 hover:text-foreground text-sm"
+                  href="/services/entrevistas-simuladas"
+                  className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
                 >
                   Entrevistas Simuladas
                 </Link>
@@ -72,60 +51,111 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Social & Theme */}
+          {/* Legal */}
           <div>
-            <h4 className="text-foreground text-sm font-semibold">Síguenos</h4>
-            <div className="mt-4 flex items-center gap-4">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground/60 hover:text-foreground transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground/60 hover:text-foreground transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground/60 hover:text-foreground transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-            </div>
-            <div className="mt-6">
-              <ThemeSwitcher />
-            </div>
+            <h3 className="text-text mb-4 flex items-center gap-2 text-lg font-semibold">
+              <Shield className="h-5 w-5" />
+              Legal
+            </h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link
+                  href="/privacy"
+                  className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/terms"
+                  className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                >
+                  Terms of Service
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/cookies"
+                  className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                >
+                  Cookie Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/privacy-settings"
+                  className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                >
+                  Privacy Settings
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="text-text mb-4 flex items-center gap-2 text-lg font-semibold">
+              <Mail className="h-5 w-5" />
+              Contacto
+            </h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a
+                  href="mailto:info@franceshr.com"
+                  className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                >
+                  info@franceshr.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:privacy@franceshr.com"
+                  className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                >
+                  privacy@franceshr.com
+                </a>
+              </li>
+              <li>
+                <Link
+                  href="/#contact"
+                  className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                >
+                  Formulario de Contacto
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-8 border-t pt-8">
+        <div className="mt-8 border-t border-gray-200 pt-8 dark:border-gray-800">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <p className="text-foreground/60 text-xs">
-              © {new Date().getFullYear()} FrancesHR. Todos los derechos reservados.
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              © {currentYear} FrancesHR. All rights reserved.
             </p>
-            <p className="text-foreground/60 text-xs">
-              Powered by{" "}
-              <a
-                href="https://fernandoaponte.dev/?utm_source=franceshr&utm_medium=footer&utm_term=franceshr"
-                target="_blank"
-                className="font-bold hover:underline"
-                rel="noreferrer"
-              >
-                CodeWfer
-              </a>
+
+            {/* Compliance Badges */}
+            <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-gray-500 dark:text-gray-500">
+              <span className="flex items-center gap-1">
+                <Shield className="h-3 w-3" />
+                GDPR Compliant
+              </span>
+              <span className="flex items-center gap-1">
+                <Shield className="h-3 w-3" />
+                CCPA Compliant
+              </span>
+              <span className="flex items-center gap-1">
+                <Shield className="h-3 w-3" />
+                UK GDPR
+              </span>
+            </div>
+          </div>
+
+          {/* Jurisdiction Notice */}
+          <div className="mt-4 text-center">
+            <p className="text-xs text-gray-500 dark:text-gray-500">
+              Serving clients in the United States, Puerto Rico, and United Kingdom
             </p>
           </div>
         </div>

@@ -5,11 +5,11 @@ import type { ServiceDetails, ServiceType } from "@/types/services.type";
 // TODO: Align service.id with the one in the database this is the id from stripe
 // TODO: Later on this can be in the database as a table.
 export const SERVICES_DATA: Record<string, ServiceDetails> = {
-  "resume-profesional": {
+  "resume-basico": {
     id: "prod_TGzX9thAYYjRkc",
-    serviceType: "resume-profesional",
+    serviceType: "resume-basico",
     icon: Briefcase,
-    title: "Resume Profesional",
+    title: "Resume Básico",
     shortDescription:
       "Haz que tu resume comunique tu valor real. Diseños modernos, contenido estratégico y redacción optimizada para captar la atención de reclutadores y sistemas automatizados (ATS).",
     extendedDescription:
@@ -25,6 +25,82 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
     price: 20,
     currency: "USD",
     stripePriceId: process.env.NEXT_PUBLIC_STRIPE_RESUME_PRICE_ID || null,
+    calComLink: null,
+    deliveryTime: "3-5 días hábiles",
+    includes: [
+      "Cuestionario detallado de carrera",
+      "Sesión de consulta inicial",
+      "Resume optimizado para ATS",
+      "Carta de presentación (opcional)",
+      "Guía de uso y personalización",
+    ],
+    ctaText: "Comprar Resume Básico",
+    faqs: [
+      {
+        question: "¿Cuánto tiempo toma recibir mi resume?",
+        answer:
+          "El proceso completo toma entre 3 a 5 días hábiles desde que completas el cuestionario inicial. Esto incluye tiempo para revisiones y ajustes según tus comentarios.",
+      },
+      {
+        question: "¿Qué información necesito proporcionar?",
+        answer:
+          "Necesitarás completar un cuestionario detallado sobre tu experiencia laboral, educación, habilidades y objetivos profesionales. También puedes enviarnos tu resume actual si tienes uno.",
+      },
+      {
+        question: "¿Puedo solicitar revisiones?",
+        answer:
+          "¡Absolutamente! Incluimos revisiones ilimitadas hasta que estés completamente satisfecho con el resultado final. Tu éxito es nuestra prioridad.",
+      },
+      {
+        question: "¿El resume será compatible con sistemas ATS?",
+        answer:
+          "Sí, todos nuestros resumes están optimizados para pasar sistemas de seguimiento de candidatos (ATS), aumentando tus posibilidades de que tu aplicación llegue a manos de reclutadores.",
+      },
+      {
+        question: "¿En qué formatos recibiré mi resume?",
+        answer:
+          "Recibirás tu resume en formato PDF profesional y también en formato Word editable para que puedas hacer ajustes menores en el futuro.",
+      },
+    ],
+    relatedServices: [
+      {
+        type: "resume-profesional",
+        title: "Resume Profesional",
+        description: "Para profesionales con experiencia establecida",
+      },
+      {
+        type: "resume-ejecutivo",
+        title: "Resume Ejecutivo",
+        description: "Premium para líderes y ejecutivos",
+      },
+      {
+        type: "mentorias-laborales",
+        title: "Mentorías Laborales",
+        description: "Orientación personalizada para tu carrera",
+      },
+    ],
+  },
+
+  "resume-profesional": {
+    id: "prod_TLsIcGlxwbLlqA",
+    serviceType: "resume-profesional",
+    icon: Briefcase,
+    title: "Resume Profesional",
+    shortDescription:
+      "Haz que tu resume comunique tu valor real. Diseños modernos, contenido estratégico y redacción optimizada para captar la atención de reclutadores y sistemas automatizados (ATS).",
+    extendedDescription:
+      "Tu resume es tu carta de presentación profesional. En FrancesHR, transformamos tu experiencia en un documento que destaca tus logros, habilidades y potencial. Utilizamos estrategias de redacción optimizadas para sistemas ATS y diseños modernos que captan la atención de reclutadores desde el primer vistazo.",
+    features: [
+      "Análisis completo de tu trayectoria profesional",
+      "Redacción estratégica optimizada para ATS",
+      "Diseño moderno y profesional",
+      "Formato adaptado a tu industria",
+      "Revisiones ilimitadas hasta tu satisfacción",
+      "Entrega en formato PDF y Word editable",
+    ],
+    price: 30,
+    currency: "USD",
+    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_RESUME_PROFESSIONAL_PRICE_ID || null,
     calComLink: null,
     deliveryTime: "3-5 días hábiles",
     includes: [
@@ -60,6 +136,102 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
         question: "¿En qué formatos recibiré mi resume?",
         answer:
           "Recibirás tu resume en formato PDF profesional y también en formato Word editable para que puedas hacer ajustes menores en el futuro.",
+      },
+    ],
+    relatedServices: [
+      {
+        type: "resume-basico",
+        title: "Resume Básico",
+        description: "Opción económica para profesionales en inicio",
+      },
+      {
+        type: "resume-ejecutivo",
+        title: "Resume Ejecutivo",
+        description: "Premium para líderes y ejecutivos",
+      },
+      {
+        type: "mentorias-laborales",
+        title: "Mentorías Laborales",
+        description: "Orientación personalizada para tu carrera",
+      },
+    ],
+  },
+  "resume-ejecutivo": {
+    id: "prod_TLsJED9PWugStC",
+    serviceType: "resume-ejecutivo",
+    icon: Briefcase,
+    title: "Resume Ejecutivo",
+    shortDescription:
+      "Resume premium para líderes y ejecutivos. Destaca tu impacto estratégico, liderazgo y resultados con un diseño sofisticado que refleja tu nivel profesional.",
+    extendedDescription:
+      "El Resume Ejecutivo está diseñado específicamente para profesionales de alto nivel, directores y ejecutivos. Destacamos tu visión estratégica, capacidad de liderazgo y resultados medibles con un formato premium que comunica autoridad y experiencia. Incluye análisis profundo de logros, métricas de impacto y posicionamiento estratégico para roles de alta dirección.",
+    features: [
+      "Análisis ejecutivo de trayectoria y logros",
+      "Redacción enfocada en impacto estratégico y ROI",
+      "Diseño premium y sofisticado",
+      "Perfil ejecutivo destacado",
+      "Métricas y KPIs de resultados",
+      "Formato optimizado para headhunters",
+      "LinkedIn profile optimization incluido",
+      "Entrega en PDF premium y Word editable",
+    ],
+    price: 60,
+    currency: "USD",
+    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_RESUME_EXECUTIVE_PRICE_ID || null,
+    calComLink: null,
+    deliveryTime: "5-7 días hábiles",
+    includes: [
+      "Consulta estratégica inicial (45 min)",
+      "Análisis profundo de logros ejecutivos",
+      "Resume ejecutivo premium",
+      "Optimización de perfil LinkedIn",
+      "Carta de presentación ejecutiva",
+      "Guía de estrategia de búsqueda ejecutiva",
+      "Revisiones ilimitadas",
+    ],
+    ctaText: "Comprar Resume Ejecutivo",
+    faqs: [
+      {
+        question: "¿Qué diferencia al Resume Ejecutivo del Profesional?",
+        answer:
+          "El Resume Ejecutivo está diseñado para roles de liderazgo senior (Director, VP, C-Level). Incluye análisis estratégico más profundo, enfoque en impacto organizacional, métricas de alto nivel, y optimización de LinkedIn. También incluye una consulta estratégica de 45 minutos.",
+      },
+      {
+        question: "¿Incluye optimización de LinkedIn?",
+        answer:
+          "Sí, incluimos la optimización completa de tu perfil de LinkedIn para asegurar consistencia con tu resume y maximizar tu visibilidad ante headhunters y reclutadores ejecutivos.",
+      },
+      {
+        question: "¿Cuánto tiempo toma el proceso?",
+        answer:
+          "El proceso completo toma entre 5 a 7 días hábiles, comenzando con una consulta estratégica. Este tiempo adicional nos permite realizar un análisis más profundo de tu trayectoria ejecutiva y resultados.",
+      },
+      {
+        question: "¿Es adecuado para búsqueda de posiciones C-Level?",
+        answer:
+          "Absolutamente. Nuestro Resume Ejecutivo está específicamente diseñado para posiciones de alta dirección, incluyendo roles C-Level. Destacamos tu visión estratégica, liderazgo transformacional y resultados medibles.",
+      },
+      {
+        question: "¿Qué incluye la consulta estratégica?",
+        answer:
+          "La consulta de 45 minutos cubre análisis de tu trayectoria ejecutiva, objetivos de carrera, mercado objetivo, estrategia de posicionamiento y recomendaciones personalizadas para tu búsqueda ejecutiva.",
+      },
+    ],
+    relatedServices: [
+      {
+        type: "resume-basico",
+        title: "Resume Básico",
+        description: "Opción económica para profesionales en inicio",
+      },
+      {
+        type: "resume-profesional",
+        title: "Resume Profesional",
+        description: "Para profesionales con experiencia establecida",
+      },
+      {
+        type: "mentorias-laborales",
+        title: "Mentorías Laborales",
+        description: "Orientación personalizada para tu carrera",
       },
     ],
   },
@@ -112,6 +284,23 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
           "Sí, puedes cancelar o reprogramar con al menos 24 horas de anticipación sin costo adicional.",
       },
     ],
+    relatedServices: [
+      {
+        type: "resume-basico",
+        title: "Resume Básico",
+        description: "Opción económica para profesionales en inicio",
+      },
+      {
+        type: "resume-ejecutivo",
+        title: "Resume Ejecutivo",
+        description: "Premium para líderes y ejecutivos",
+      },
+      {
+        type: "entrevistas-simuladas",
+        title: "Entrevistas Simuladas",
+        description: "Prepárate con una experta en coaching laboral y reclutamiento",
+      },
+    ],
   },
   "entrevistas-simuladas": {
     id: "prod_",
@@ -160,6 +349,23 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
         question: "¿Puedo hacer múltiples sesiones?",
         answer:
           "¡Por supuesto! Muchos clientes hacen varias sesiones para diferentes tipos de entrevistas o para seguir mejorando sus habilidades.",
+      },
+    ],
+    relatedServices: [
+      {
+        type: "resume-basico",
+        title: "Resume Básico",
+        description: "Opción económica para profesionales en inicio",
+      },
+      {
+        type: "resume-ejecutivo",
+        title: "Resume Ejecutivo",
+        description: "Premium para líderes y ejecutivos",
+      },
+      {
+        type: "mentorias-laborales",
+        title: "Mentorías Laborales",
+        description: "Orientación personalizada para tu carrera",
       },
     ],
   },

@@ -4,6 +4,9 @@ import type { Metadata } from "next";
 import { Readex_Pro } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 
+import { CookieConsentBanner } from "@/components/molecules/cookie-consent-banner";
+import { Footer } from "@/components/organisms/sections/footer";
+
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : `${process.env.NEXT_PUBLIC_SITE_URL}`;
@@ -46,7 +49,11 @@ export default function RootLayout({
           enableColorScheme
           storageKey="franceshr-theme"
         >
-          {children}
+          <div className="flex min-h-screen flex-col">
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <CookieConsentBanner />
+          </div>
         </ThemeProvider>
       </body>
     </html>
