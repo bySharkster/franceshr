@@ -1,6 +1,7 @@
 # Frances HR
 
 A modern HR management platform built with Next.js, Supabase, and Stripe.
+For more information, visit the [official website](https://franceshr.com).
 
 ## Quick Start
 
