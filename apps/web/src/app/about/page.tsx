@@ -85,7 +85,7 @@ export default function AboutPage() {
             className="relative"
           >
             <div className="from-primary to-secondary bg-linear-to-br absolute -inset-1 rounded-full opacity-75 blur-lg" />
-            <div className="relative h-32 w-32 overflow-hidden rounded-full bg-gradient-to-br from-blue-100 to-purple-100 p-1 sm:h-40 sm:w-40 md:h-48 md:w-48 dark:from-blue-900 dark:to-purple-900">
+            <div className="bg-linear-to-br relative h-32 w-32 overflow-hidden rounded-full from-blue-100 to-purple-100 p-1 sm:h-40 sm:w-40 md:h-48 md:w-48 dark:from-blue-900 dark:to-purple-900">
               <div className="flex h-full w-full items-center justify-center rounded-full bg-white dark:bg-gray-900">
                 <Heart
                   className="text-primary h-16 w-16 fill-indigo-100 sm:h-20 sm:w-20 md:h-24 md:w-24"
