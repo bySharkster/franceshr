@@ -1,0 +1,96 @@
+import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs/blocks";
+
+<Meta title="Design System/Colors" />
+
+# Color Palette
+
+These are the core colors used throughout the FrancesHR application, based on our Tailwind CSS theme and shadcn/ui components.
+
+## Brand Colors
+
+<ColorPalette>
+  <ColorItem
+    title="Primary"
+    subtitle="Main brand color - used for primary buttons and key actions"
+    colors={{
+      "Light Mode": "oklch(0.6186 0.0807 265.1067)",
+      "Dark Mode": "oklch(0.6947 0.0537 269.0162)",
+    }}
+  />
+  <ColorItem
+    title="Secondary"
+    subtitle="Secondary brand color - used for secondary buttons and accents"
+    colors={{
+      "Light Mode": "oklch(0.788 0.0622 284.8849)",
+      "Dark Mode": "oklch(0.5257 0.055 266.6782)",
+    }}
+  />
+  <ColorItem
+    title="Accent"
+    subtitle="Accent color - used for hover states and highlights"
+    colors={{
+      "Light Mode": "oklch(0.8789 0.0246 267.9097)",
+      "Dark Mode": "oklch(0.4464 0.04 266.443)",
+    }}
+  />
+</ColorPalette>
+
+## Semantic Colors
+
+<ColorPalette>
+  <ColorItem
+    title="Destructive"
+    subtitle="Error and destructive actions - used for delete buttons and error states"
+    colors={{
+      "Light & Dark": "oklch(0.6368 0.2078 25.3313)",
+    }}
+  />
+  <ColorItem
+    title="Muted"
+    subtitle="Muted text and backgrounds - used for disabled states and subtle elements"
+    colors={{
+      "Light Mode": "oklch(0.9067 0 0)",
+      "Dark Mode": "oklch(0.3612 0.014 274.5258)",
+    }}
+  />
+</ColorPalette>
+
+## UI Colors
+
+<ColorPalette>
+  <ColorItem
+    title="Background"
+    subtitle="Main background color"
+    colors={{
+      "Light Mode": "oklch(0.988 0.0082 91.481)",
+      "Dark Mode": "oklch(0.2446 0.0096 276.6873)",
+    }}
+  />
+  <ColorItem
+    title="Foreground"
+    subtitle="Main text color"
+    colors={{
+      "Light Mode": "oklch(0.2178 0 0)",
+      "Dark Mode": "oklch(0.9249 0 0)",
+    }}
+  />
+  <ColorItem
+    title="Border"
+    subtitle="Border and input outline color"
+    colors={{
+      "Light Mode": "oklch(0.9401 0 0)",
+      "Dark Mode": "oklch(0.3574 0.0141 274.5183)",
+    }}
+  />
+</ColorPalette>
+
+## Button Variants
+
+These colors are applied through the shadcn/ui button component variants:
+
+- **Default**: Uses Primary color with white text
+- **Destructive**: Uses Destructive color for dangerous actions
+- **Outline**: Uses Border color with Background fill
+- **Secondary**: Uses Secondary color
+- **Ghost**: Transparent with Accent hover state
+- **Link**: Uses Primary color with underline

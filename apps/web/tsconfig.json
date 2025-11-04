@@ -1,0 +1,21 @@
+{
+  "extends": "@franceshr/config/typescript",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "public/*": ["./public/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": [
+    "node_modules",
+    "seed.ts",
+    "seed.config.ts",
+    ".snaplet/**",
+    "../../seed.ts",
+    "../../seed.config.ts",
+    "**/*.stories.tsx",
+    "**/*.stories.ts",
+    ".storybook/**"
+  ]
+}

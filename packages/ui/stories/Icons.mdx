@@ -1,0 +1,403 @@
+import { Meta, IconGallery, IconItem } from "@storybook/addon-docs/blocks";
+import {
+  User,
+  Mail,
+  Lock,
+  Home,
+  Settings,
+  Search,
+  Bell,
+  Calendar,
+  FileText,
+  Trash2,
+  Edit,
+  Plus,
+  X,
+  Check,
+  ChevronRight,
+  ChevronLeft,
+  ChevronDown,
+  ChevronUp,
+  ArrowRight,
+  ArrowLeft,
+  ArrowUpRight,
+  InfoIcon,
+  AlertCircle,
+  CheckCircle,
+  XCircle,
+  Sun,
+  Moon,
+  Laptop,
+  Circle,
+  Download,
+  Upload,
+  Eye,
+  EyeOff,
+  LogOut,
+  LogIn,
+} from "lucide-react";
+
+<Meta title="Design System/Icons" />
+
+# Icons
+
+The FrancesHR application uses **Lucide React** icons with a custom configuration for a clean, minimal aesthetic.
+
+## Icon Configuration
+
+All icons in the FrancesHR application follow these specifications:
+
+- **Library**: [Lucide React](https://lucide.dev/)
+- **Stroke Width**: `1px` (thinner than default 2px for a more refined look)
+- **Color**: `currentColor` (inherits from parent, typically primary color)
+- **Default Size**: `16px` (1rem)
+
+### Usage Example
+
+```tsx
+import { User } from "lucide-react";
+
+// Default usage with 1px stroke
+<User className="text-primary" strokeWidth={1} size={16} />
+
+// Custom size
+<User className="text-primary" strokeWidth={1} size={24} />
+```
+
+---
+
+## Icon Sizes
+
+We use consistent icon sizes throughout the application:
+
+<div style={{ display: "flex", gap: "2rem", alignItems: "flex-start", marginBottom: "2rem" }}>
+  <div style={{ textAlign: "center" }}>
+    <User className="text-primary" strokeWidth={1} size={12} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>**XS** - 12px</p>
+    <p style={{ fontSize: "11px", color: "#666" }}>Inline text icons</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <User className="text-primary" strokeWidth={1} size={16} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>**SM** - 16px</p>
+    <p style={{ fontSize: "11px", color: "#666" }}>Default size</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <User className="text-primary" strokeWidth={1} size={20} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>**MD** - 20px</p>
+    <p style={{ fontSize: "11px", color: "#666" }}>Buttons, inputs</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <User className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>**LG** - 24px</p>
+    <p style={{ fontSize: "11px", color: "#666" }}>Headers, cards</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <User className="text-primary" strokeWidth={1} size={32} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>**XL** - 32px</p>
+    <p style={{ fontSize: "11px", color: "#666" }}>Feature icons</p>
+  </div>
+</div>
+
+---
+
+## Icon Categories
+
+### User & Account
+
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+    gap: "1.5rem",
+    marginBottom: "2rem",
+  }}
+>
+  <div style={{ textAlign: "center" }}>
+    <User className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>User</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <Mail className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Mail</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <Lock className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Lock</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <LogIn className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>LogIn</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <LogOut className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>LogOut</p>
+  </div>
+</div>
+
+### Navigation
+
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+    gap: "1.5rem",
+    marginBottom: "2rem",
+  }}
+>
+  <div style={{ textAlign: "center" }}>
+    <Home className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Home</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <Settings className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Settings</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <Search className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Search</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <Bell className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Bell</p>
+  </div>
+</div>
+
+### Actions
+
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+    gap: "1.5rem",
+    marginBottom: "2rem",
+  }}
+>
+  <div style={{ textAlign: "center" }}>
+    <Plus className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Plus</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <Edit className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Edit</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <Trash2 className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Trash2</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <Download className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Download</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <Upload className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Upload</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <Eye className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Eye</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <EyeOff className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>EyeOff</p>
+  </div>
+</div>
+
+### Arrows & Chevrons
+
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+    gap: "1.5rem",
+    marginBottom: "2rem",
+  }}
+>
+  <div style={{ textAlign: "center" }}>
+    <ChevronRight className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>ChevronRight</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <ChevronLeft className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>ChevronLeft</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <ChevronDown className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>ChevronDown</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <ChevronUp className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>ChevronUp</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <ArrowRight className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>ArrowRight</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <ArrowLeft className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>ArrowLeft</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <ArrowUpRight className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>ArrowUpRight</p>
+  </div>
+</div>
+
+### Status & Feedback
+
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+    gap: "1.5rem",
+    marginBottom: "2rem",
+  }}
+>
+  <div style={{ textAlign: "center" }}>
+    <Check className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Check</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <X className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>X</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <CheckCircle className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>CheckCircle</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <XCircle className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>XCircle</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <AlertCircle className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>AlertCircle</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <InfoIcon className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>InfoIcon</p>
+  </div>
+</div>
+
+### Content & Files
+
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+    gap: "1.5rem",
+    marginBottom: "2rem",
+  }}
+>
+  <div style={{ textAlign: "center" }}>
+    <FileText className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>FileText</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <Calendar className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Calendar</p>
+  </div>
+</div>
+
+### Theme
+
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+    gap: "1.5rem",
+    marginBottom: "2rem",
+  }}
+>
+  <div style={{ textAlign: "center" }}>
+    <Sun className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Sun</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <Moon className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Moon</p>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <Laptop className="text-primary" strokeWidth={1} size={24} />
+    <p style={{ fontSize: "12px", marginTop: "8px" }}>Laptop</p>
+  </div>
+</div>
+
+---
+
+## Usage Guidelines
+
+### Stroke Width
+
+**Always use `strokeWidth={1}` for consistency:**
+
+```tsx
+// ✅ Correct
+<User strokeWidth={1} size={16} className="text-primary" />
+
+// ❌ Incorrect (uses default 2px stroke)
+<User size={16} className="text-primary" />
+```
+
+### Color
+
+**Use Tailwind color classes for consistency:**
+
+```tsx
+// Primary color (default)
+<User strokeWidth={1} className="text-primary" />
+
+// Muted/secondary
+<User strokeWidth={1} className="text-muted-foreground" />
+
+// Destructive/error
+<Trash2 strokeWidth={1} className="text-destructive" />
+
+// Success
+<CheckCircle strokeWidth={1} className="text-green-600" />
+```
+
+### Size Guidelines
+
+- **12px**: Inline with small text (captions, badges)
+- **16px**: Default size for most UI elements
+- **20px**: Buttons, form inputs, navigation items
+- **24px**: Section headers, card headers
+- **32px+**: Feature highlights, empty states
+
+### Accessibility
+
+- Always provide meaningful context (aria-label or sr-only text)
+- Ensure sufficient color contrast (minimum 4.5:1 ratio)
+- Don't rely solely on icons to convey meaning
+- Use semantic HTML alongside icons
+
+### Best Practices
+
+- **Consistency**: Always use `strokeWidth={1}` across the application
+- **Alignment**: Center icons vertically with adjacent text
+- **Spacing**: Add appropriate margin/padding around icons
+- **Color**: Use `currentColor` or Tailwind classes, avoid hardcoded colors
+- **Size**: Match icon size to text size for inline icons
+- **Loading**: Consider using skeleton loaders for async icon content
+
+### Common Patterns
+
+```tsx
+// Button with icon
+<Button>
+  <Plus strokeWidth={1} size={16} />
+  Add Item
+</Button>
+
+// Icon-only button
+<Button variant="ghost" size="icon">
+  <Settings strokeWidth={1} size={16} />
+  <span className="sr-only">Settings</span>
+</Button>
+
+// Input with icon
+<div className="relative">
+  <Search strokeWidth={1} size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+  <Input className="pl-10" placeholder="Search..." />
+</div>
+```

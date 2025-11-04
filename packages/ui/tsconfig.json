@@ -1,0 +1,13 @@
+{
+  "extends": "@franceshr/config/typescript",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src/**/*", "stories/**/*", ".storybook/**/*"],
+  "exclude": ["node_modules", "dist", "storybook-static"]
+}
