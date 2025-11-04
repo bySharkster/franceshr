@@ -223,22 +223,45 @@ function OnboardingContent() {
       if (!service) throw new Error("Service not found");
       if (!order) throw new Error("Order not found");
 
-      // Save onboarding data to database
+      // Check if onboarding data already exists for this order
+      const { data: existingData } = await supabase
+        .from("onboarding_data")
+        .select("id")
+        .eq("order_id", order.id)
+        .single();
+
+      // Save or update onboarding data to database
       // TODO: Use service.id instead of hardcoding
       // TODO: align service.id with the one in the database
-      const { error: dbError } = await supabase.from("onboarding_data").insert({
-        user_id: user.id,
-        service_id: service.id,
-        order_id: order.id,
-        career_goals: formData.careerGoals,
-        industry_pursuing: formData.industryPursuing,
-        related_experience: formData.relatedExperience,
-        resume_url: resumeUrl,
+      if (existingData) {
+        // Update existing record
+        const { error: dbError } = await supabase
+          .from("onboarding_data")
+          .update({
+            career_goals: formData.careerGoals,
+            industry_pursuing: formData.industryPursuing,
+            related_experience: formData.relatedExperience,
+            resume_url: resumeUrl,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("order_id", order.id);
 
-        created_at: new Date().toISOString(),
-      });
+        if (dbError) throw dbError;
+      } else {
+        // Insert new record
+        const { error: dbError } = await supabase.from("onboarding_data").insert({
+          user_id: user.id,
+          service_id: service.id,
+          order_id: order.id,
+          career_goals: formData.careerGoals,
+          industry_pursuing: formData.industryPursuing,
+          related_experience: formData.relatedExperience,
+          resume_url: resumeUrl,
+          created_at: new Date().toISOString(),
+        });
 
-      if (dbError) throw dbError;
+        if (dbError) throw dbError;
+      }
 
       setUploadProgress(90);
 

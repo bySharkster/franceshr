@@ -14,8 +14,8 @@ interface SendEmailParams {
 }
 
 class EmailServiceClass {
-  private readonly FROM_EMAIL = process.env.EMAIL_FROM || "noreply@mail.franceshr.com";
-  private readonly OWNER_EMAIL = process.env.EMAIL_TO || "contact@fernandoaponte.dev";
+  private readonly FROM_EMAIL = process.env.NEXT_PUBLIC_EMAIL_FROM || "noreply@mail.franceshr.com";
+  private readonly OWNER_EMAIL = process.env.NEXT_PUBLIC_EMAIL_TO || "contact@fernandoaponte.dev";
 
   /**
    * Base email sending method with retry logic

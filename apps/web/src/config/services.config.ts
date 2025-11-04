@@ -1,11 +1,35 @@
 import type { ServiceDetails, ServiceType } from "@franceshr/types";
 import { Briefcase, MessageSquare, Users } from "lucide-react";
 
+if (!process.env.NEXT_PUBLIC_STRIPE_RESUME_PRODUCT_ID) {
+  throw new Error("NEXT_PUBLIC_STRIPE_RESUME_PRODUCT_ID is not defined");
+}
+
+if (!process.env.NEXT_PUBLIC_STRIPE_RESUME_PRICE_ID) {
+  throw new Error("NEXT_PUBLIC_STRIPE_RESUME_PRICE_ID is not defined");
+}
+
+if (!process.env.NEXT_PUBLIC_STRIPE_RESUME_PROFESSIONAL_PRODUCT_ID) {
+  throw new Error("NEXT_PUBLIC_STRIPE_RESUME_PROFESSIONAL_PRODUCT_ID is not defined");
+}
+
+if (!process.env.NEXT_PUBLIC_STRIPE_RESUME_PROFESSIONAL_PRICE_ID) {
+  throw new Error("NEXT_PUBLIC_STRIPE_RESUME_PROFESSIONAL_PRICE_ID is not defined");
+}
+
+if (!process.env.NEXT_PUBLIC_STRIPE_RESUME_EXECUTIVE_PRODUCT_ID) {
+  throw new Error("NEXT_PUBLIC_STRIPE_RESUME_EXECUTIVE_PRODUCT_ID is not defined");
+}
+
+if (!process.env.NEXT_PUBLIC_STRIPE_RESUME_EXECUTIVE_PRICE_ID) {
+  throw new Error("NEXT_PUBLIC_STRIPE_RESUME_EXECUTIVE_PRICE_ID is not defined");
+}
+
 // TODO: Align service.id with the one in the database this is the id from stripe
 // TODO: Later on this can be in the database as a table.
 export const SERVICES_DATA: Record<string, ServiceDetails> = {
   "resume-basico": {
-    id: "prod_TGzX9thAYYjRkc",
+    id: process.env.NEXT_PUBLIC_STRIPE_RESUME_PRODUCT_ID,
     serviceType: "resume-basico",
     icon: Briefcase,
     title: "Resume Básico",
@@ -23,7 +47,7 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
     ],
     price: 20,
     currency: "USD",
-    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_RESUME_PRICE_ID || null,
+    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_RESUME_PRICE_ID,
     calComLink: null,
     deliveryTime: "3-5 días hábiles",
     includes: [
@@ -81,7 +105,7 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
   },
 
   "resume-profesional": {
-    id: "prod_TLsIcGlxwbLlqA",
+    id: process.env.NEXT_PUBLIC_STRIPE_RESUME_PROFESSIONAL_PRODUCT_ID,
     serviceType: "resume-profesional",
     icon: Briefcase,
     title: "Resume Profesional",
@@ -99,7 +123,7 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
     ],
     price: 30,
     currency: "USD",
-    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_RESUME_PROFESSIONAL_PRICE_ID || null,
+    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_RESUME_PROFESSIONAL_PRICE_ID,
     calComLink: null,
     deliveryTime: "3-5 días hábiles",
     includes: [
@@ -156,7 +180,7 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
     ],
   },
   "resume-ejecutivo": {
-    id: "prod_TLsJED9PWugStC",
+    id: process.env.NEXT_PUBLIC_STRIPE_RESUME_EXECUTIVE_PRODUCT_ID,
     serviceType: "resume-ejecutivo",
     icon: Briefcase,
     title: "Resume Ejecutivo",
@@ -176,7 +200,7 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
     ],
     price: 60,
     currency: "USD",
-    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_RESUME_EXECUTIVE_PRICE_ID || null,
+    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_RESUME_EXECUTIVE_PRICE_ID,
     calComLink: null,
     deliveryTime: "5-7 días hábiles",
     includes: [
