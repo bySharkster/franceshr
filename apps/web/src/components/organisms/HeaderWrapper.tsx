@@ -27,8 +27,8 @@ export async function HeaderWrapper() {
     <EnvVarWarning />
   ) : user ? (
     <div className="flex items-center gap-4">
-      Hola, {user.user_metadata.full_name}!
-      <Button asChild size="sm" variant="default" className="hidden md:flex">
+      <span className="hidden md:block">Hola, {user.user_metadata.full_name}!</span>
+      <Button asChild size="sm" variant="default" className="lex">
         <Link href="/app">Ir al App</Link>
       </Button>
       {/* <LogoutButton /> */}

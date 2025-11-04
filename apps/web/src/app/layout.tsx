@@ -18,6 +18,55 @@ export const metadata: Metadata = {
     default: "FrancesHR",
   },
   description: "The fastest way to land your next job",
+  keywords: [
+    "job search",
+    "resume builder",
+    "career development",
+    "job applications",
+    "HR platform",
+    "employment",
+    "job matching",
+  ],
+  authors: [{ name: "FrancesHR" }],
+  creator: "FrancesHR",
+  publisher: "FrancesHR",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: defaultUrl,
+    siteName: "FrancesHR",
+    title: "FrancesHR",
+    description: "The fastest way to land your next job",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "FrancesHR - The fastest way to land your next job",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FrancesHR",
+    description: "The fastest way to land your next job",
+    images: ["/logo.png"],
+    creator: "@franceshr",
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
 };
 
 const readexPro = Readex_Pro({
