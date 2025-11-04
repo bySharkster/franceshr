@@ -27,9 +27,9 @@ export const metadata: Metadata = {
     "employment",
     "job matching",
   ],
-  authors: [{ name: "FrancesHR" }],
-  creator: "FrancesHR",
-  publisher: "FrancesHR",
+  authors: [{ name: "CodeWFer" }],
+  creator: "CodeWFer",
+  publisher: "CodeWFer",
   robots: {
     index: true,
     follow: true,
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: "FrancesHR",
     description: "The fastest way to land your next job",
     images: ["/og-image.webp"],
-    creator: "@franceshr",
+    creator: "@codewfer",
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
