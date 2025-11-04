@@ -1,8 +1,10 @@
 "use client";
 
+import { Button } from "@franceshr/ui";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import {
@@ -30,8 +32,14 @@ const LinkItems = [
 ];
 
 export const NavSection = () => {
+  const router = useRouter();
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(false);
+
+  const handleLinkClick = (href: string) => {
+    setOpen(false);
+    router.push(href);
+  };
 
   if (isMobile) {
     return (
@@ -79,7 +87,9 @@ export const NavSection = () => {
                     {LinkItems.map((item) => (
                       <NavigationMenuItem key={item.href} className="w-full">
                         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                          <Link href={item.href}>{item.label}</Link>
+                          <Button onClick={() => handleLinkClick(item.href)} variant="ghost">
+                            {item.label}
+                          </Button>
                         </NavigationMenuLink>
                       </NavigationMenuItem>
                     ))}
