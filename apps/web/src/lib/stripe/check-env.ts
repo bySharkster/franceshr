@@ -1,9 +1,9 @@
 // Stripe Publishable Key
 let stripePublicKey: string;
-if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
+if (!process.env.STRIPE_PUBLISHABLE_KEY) {
   throw new Error("Missing Stripe public key");
 } else {
-  stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+  stripePublicKey = process.env.STRIPE_PUBLISHABLE_KEY;
 }
 
 // Stripe Secret Key

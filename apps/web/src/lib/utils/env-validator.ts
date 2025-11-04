@@ -10,7 +10,7 @@ interface EnvConfig {
   SUPABASE_SERVICE_ROLE_KEY: string;
 
   // Stripe
-  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: string;
+  STRIPE_PUBLISHABLE_KEY: string;
   STRIPE_SECRET_KEY: string;
   STRIPE_WEBHOOK_SECRET: string;
 
@@ -44,7 +44,7 @@ const REQUIRED_SERVER_VARS = [
 const REQUIRED_CLIENT_VARS = [
   "NEXT_PUBLIC_SUPABASE_URL",
   "NEXT_PUBLIC_SUPABASE_ANON_KEY",
-  "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+  "STRIPE_PUBLISHABLE_KEY",
   "NEXT_PUBLIC_SITE_URL",
 ] as const;
 
@@ -128,10 +128,10 @@ export function validateAllEnv(): void {
     });
   }
 
-  const stripePublishable = getEnv("NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY");
+  const stripePublishable = getEnv("STRIPE_PUBLISHABLE_KEY");
   if (!stripePublishable.startsWith("pk_")) {
-    throw new ConfigurationError("NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY must start with 'pk_'", {
-      missingVar: "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+    throw new ConfigurationError("STRIPE_PUBLISHABLE_KEY must start with 'pk_'", {
+      missingVar: "STRIPE_PUBLISHABLE_KEY",
     });
   }
 
@@ -148,7 +148,7 @@ export function getValidatedEnv(): EnvConfig {
     NEXT_PUBLIC_SUPABASE_URL: getEnv("NEXT_PUBLIC_SUPABASE_URL"),
     NEXT_PUBLIC_SUPABASE_ANON_KEY: getEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY"),
     SUPABASE_SERVICE_ROLE_KEY: getEnv("SUPABASE_SERVICE_ROLE_KEY"),
-    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: getEnv("NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"),
+    STRIPE_PUBLISHABLE_KEY: getEnv("STRIPE_PUBLISHABLE_KEY"),
     STRIPE_SECRET_KEY: getEnv("STRIPE_SECRET_KEY"),
     STRIPE_WEBHOOK_SECRET: getEnv("STRIPE_WEBHOOK_SECRET"),
     RESEND_API_KEY: getEnv("RESEND_API_KEY"),
