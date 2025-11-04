@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     description: "The fastest way to land your next job",
     images: [
       {
-        url: "/logo.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "FrancesHR - The fastest way to land your next job",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "FrancesHR",
     description: "The fastest way to land your next job",
-    images: ["/logo.png"],
+    images: ["/og-image.jpg"],
     creator: "@franceshr",
   },
   verification: {
