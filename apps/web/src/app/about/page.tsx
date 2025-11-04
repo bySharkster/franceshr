@@ -3,6 +3,8 @@
 import { Award, Briefcase, GraduationCap, Heart, Target, Users } from "lucide-react";
 import { motion } from "motion/react";
 
+import { GeneralNavigationGroup } from "@/components/organisms/general-navigation-group";
+
 const expertise = [
   {
     icon: Briefcase,
@@ -33,6 +35,9 @@ const expertise = [
 export default function AboutPage() {
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
+      <div className="absolute left-4 top-8 z-50 w-full max-w-3xl items-center justify-start gap-2 pb-8">
+        <GeneralNavigationGroup />
+      </div>
       {/* Background gradient */}
       <div className="bg-linear-to-b absolute inset-0 -z-10 from-transparent via-purple-50/30 to-transparent dark:via-purple-950/10" />
 
