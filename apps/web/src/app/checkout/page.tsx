@@ -80,14 +80,14 @@ function CheckoutContent() {
       const response = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: {
-          "Content-Type": "application/jsopn",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           userId: currentUser.id,
           priceId: service.stripePriceId,
           package_slug: service.serviceType,
           successUrl: `${window.location.origin}/onboarding?service=${serviceType}&session_id={CHECKOUT_SESSION_ID}`,
-          cancelUrl: `${window.location.origin}/services/${service.id}`,
+          cancelUrl: `${window.location.origin}/services/${service.serviceType}`,
         }),
       });
 
