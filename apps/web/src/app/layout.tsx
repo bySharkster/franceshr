@@ -71,6 +71,9 @@ const readexPro = Readex_Pro({
   variable: "--font-readex-pro",
   display: "swap",
   subsets: ["latin"],
+  preload: true,
+  fallback: ["system-ui", "arial"],
+  adjustFontFallback: true,
 });
 
 export default function RootLayout({
@@ -81,6 +84,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Preconnect to external domains */}
+        <link rel="preconnect" href="https://analytics.ahrefs.com" />
+        <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
+
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -92,7 +99,7 @@ export default function RootLayout({
         <Script
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="6IbI7JiCqsvwrPN4pQkjAA"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
 
         <ThemeProvider

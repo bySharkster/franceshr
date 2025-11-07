@@ -1,14 +1,51 @@
+import dynamic from "next/dynamic";
+
 import { HeaderWrapper } from "@/components/organisms/HeaderWrapper";
-import { About } from "@/components/organisms/sections/about";
-// import { Contact } from "@/components/organisms/sections/contact";
-// import { FAQ } from "@/components/organisms/sections/faq";
-import { FinalCTA } from "@/components/organisms/sections/final-cta";
 import { Hero } from "@/components/organisms/sections/hero";
-// import { HowItWorks } from "@/components/organisms/sections/how-it-works";
-// import { Pricing } from "@/components/organisms/sections/pricing";
-import { Services } from "@/components/organisms/sections/services";
-import { TestimonialsSection } from "@/components/organisms/sections/testimonials-section";
-import { WhyChoose } from "@/components/organisms/sections/why-choose";
+
+// Lazy load below-the-fold components
+const About = dynamic(
+  () => import("@/components/organisms/sections/about").then((mod) => ({ default: mod.About })),
+  {
+    loading: () => <div className="min-h-[400px]" />,
+  },
+);
+
+const Services = dynamic(
+  () =>
+    import("@/components/organisms/sections/services").then((mod) => ({ default: mod.Services })),
+  {
+    loading: () => <div className="min-h-[400px]" />,
+  },
+);
+
+const WhyChoose = dynamic(
+  () =>
+    import("@/components/organisms/sections/why-choose").then((mod) => ({
+      default: mod.WhyChoose,
+    })),
+  {
+    loading: () => <div className="min-h-[400px]" />,
+  },
+);
+
+const TestimonialsSection = dynamic(
+  () =>
+    import("@/components/organisms/sections/testimonials-section").then((mod) => ({
+      default: mod.TestimonialsSection,
+    })),
+  {
+    loading: () => <div className="min-h-[400px]" />,
+  },
+);
+
+const FinalCTA = dynamic(
+  () =>
+    import("@/components/organisms/sections/final-cta").then((mod) => ({ default: mod.FinalCTA })),
+  {
+    loading: () => <div className="min-h-[200px]" />,
+  },
+);
 
 export default function Home() {
   return (
@@ -28,20 +65,16 @@ export default function Home() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_100%_200px,hsl(var(--primary)/0.15),transparent)]"></div>
         </div>
 
-        {/* Hero */}
+        {/* Hero - Critical above-the-fold content */}
         <Hero />
 
-        {/* Main Steps */}
+        {/* Main Steps - Lazy loaded */}
         <div className="flex flex-1 flex-col">
           <About />
           <Services />
           <WhyChoose />
           <TestimonialsSection />
           <FinalCTA />
-          {/* <HowItWorks /> or <CoreValues/> */}
-          {/* <FAQ /> or <Questions/> */}
-          {/* <Pricing /> or <Blog/> or <News/> */}
-          {/* <Contact /> */}
         </div>
       </div>
     </div>
