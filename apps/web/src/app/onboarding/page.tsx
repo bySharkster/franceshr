@@ -25,6 +25,7 @@ function OnboardingContent() {
   const searchParams = useSearchParams();
   const serviceType = searchParams.get("service");
   const sessionId = searchParams.get("session_id");
+  const orderId = searchParams.get("orderId");
 
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
@@ -63,7 +64,7 @@ function OnboardingContent() {
         const pollInterval = 1000; // Check every second
 
         const pollForOrder = async () => {
-          const { data: order } = await supabase
+          const { data: order }: { data: Order | null } = await supabase
             .from("orders")
             .select("*")
             .eq("user_id", currentUser.id)
@@ -76,6 +77,7 @@ function OnboardingContent() {
           if (order) {
             console.log("Order found:", order);
             setOrder(order);
+
             setVerifyingPayment(false);
             return true;
           }
@@ -95,6 +97,26 @@ function OnboardingContent() {
         };
 
         await pollForOrder();
+      } else if (orderId) {
+        const { data: order } = await supabase
+          .from("orders")
+          .select("*")
+          .eq("id", orderId)
+          .eq("user_id", currentUser.id)
+          .eq("status", "paid")
+          .order("created_at", { ascending: false })
+          .limit(1)
+          .single();
+
+        if (!order) {
+          console.log("No orders found, redirecting to service page");
+          router.push(`/services/${order?.package_slug}`);
+          return;
+        }
+
+        console.log("Existing order found:", order);
+        setOrder(order);
+        setVerifyingPayment(false);
       } else {
         // No session_id, check if order exists (returning user)
         const { data: order } = await supabase
@@ -119,17 +141,21 @@ function OnboardingContent() {
       }
     };
 
-    if (serviceType) {
+    if (serviceType || orderId) {
       checkAuth();
     }
-  }, [serviceType, sessionId, router]);
+  }, [serviceType, sessionId, router, orderId]);
 
   useEffect(() => {
     if (serviceType) {
       const service = getServiceByType(serviceType as ServiceType);
       setService(service);
     }
-  }, [serviceType]);
+    if (order) {
+      const service = getServiceByType(order.package_slug as ServiceType);
+      setService(service);
+    }
+  }, [serviceType, order]);
 
   if (!user) {
     return (

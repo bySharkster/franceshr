@@ -2,10 +2,8 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Readex_Pro } from "next/font/google";
+import Script from "next/script";
 import { ThemeProvider } from "next-themes";
-
-import { CookieConsentBanner } from "@/components/molecules/cookie-consent-banner";
-import { Footer } from "@/components/organisms/sections/footer";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -88,9 +86,15 @@ export default function RootLayout({
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={`${readexPro.className} antialiased`}>
+        {/* Ahrefs Analytics */}
+        <Script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="6IbI7JiCqsvwrPN4pQkjAA"
+          strategy="afterInteractive"
+        />
+
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -100,8 +104,6 @@ export default function RootLayout({
         >
           <div className="flex min-h-screen flex-col">
             <main className="flex-1">{children}</main>
-            <Footer />
-            <CookieConsentBanner />
           </div>
         </ThemeProvider>
       </body>

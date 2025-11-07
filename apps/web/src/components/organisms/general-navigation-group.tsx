@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Briefcase,ChevronDownIcon, Home, Info, LogIn } from "lucide-react";
+import { ArrowLeft, Briefcase, ChevronDownIcon, Home, Info, LogIn } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/atoms/ui/button";

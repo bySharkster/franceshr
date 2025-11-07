@@ -17,7 +17,9 @@
     "test:watch": "turbo run test:watch",
     "test:coverage": "turbo run test:coverage",
     "web:dev": "turbo run dev --filter=@franceshr/web",
-    "clean": "turbo run clean && rm -rf node_modules"
+    "clean": "turbo run clean && rm -rf node_modules",
+    "supabase:dev": "supabase start",
+    "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe-webhook"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
