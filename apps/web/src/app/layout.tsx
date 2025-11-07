@@ -5,9 +5,7 @@ import { Readex_Pro } from "next/font/google";
 import Script from "next/script";
 import { ThemeProvider } from "next-themes";
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : `${process.env.NEXT_PUBLIC_SITE_URL}`;
+const defaultUrl = `${process.env.NEXT_PUBLIC_SITE_URL}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
@@ -15,7 +13,7 @@ export const metadata: Metadata = {
     template: "%s | FrancesHR",
     default: "FrancesHR",
   },
-  description: "The fastest way to land your next job",
+  description: "La forma mas rapida de conseguir tu proximo trabajo",
   keywords: [
     "job search",
     "resume builder",
@@ -45,20 +43,20 @@ export const metadata: Metadata = {
     url: defaultUrl,
     siteName: "FrancesHR",
     title: "FrancesHR",
-    description: "The fastest way to land your next job",
+    description: "La forma mas rapida de conseguir tu proximo trabajo",
     images: [
       {
         url: "/og-image.webp",
         width: 1200,
         height: 630,
-        alt: "FrancesHR - The fastest way to land your next job",
+        alt: "FrancesHR - La forma mas rapida de conseguir tu proximo trabajo",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "FrancesHR",
-    description: "The fastest way to land your next job",
+    description: "La forma mas rapida de conseguir tu proximo trabajo",
     images: ["/og-image.webp"],
     creator: "@codewfer",
   },
