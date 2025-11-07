@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: "%s | FrancesHR",
     default: "FrancesHR",
   },
-  description: "La forma mas rapida de conseguir tu proximo trabajo",
+  description: "La forma más rápida de conseguir tu próximo trabajo",
   keywords: [
     "job search",
     "resume builder",
@@ -43,20 +43,20 @@ export const metadata: Metadata = {
     url: defaultUrl,
     siteName: "FrancesHR",
     title: "FrancesHR",
-    description: "La forma mas rapida de conseguir tu proximo trabajo",
+    description: "La forma más rápida de conseguir tu próximo trabajo",
     images: [
       {
         url: "/og-image.webp",
         width: 1200,
         height: 630,
-        alt: "FrancesHR - La forma mas rapida de conseguir tu proximo trabajo",
+        alt: "FrancesHR - La forma más rápida de conseguir tu próximo trabajo",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "FrancesHR",
-    description: "La forma mas rapida de conseguir tu proximo trabajo",
+    description: "La forma más rápida de conseguir tu próximo trabajo",
     images: ["/og-image.webp"],
     creator: "@codewfer",
   },
