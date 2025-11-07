@@ -45,18 +45,10 @@
       "outputs": [".next/**", "!.next/cache/**", "dist/**", "storybook-static/**"]
     },
     "dev": {
-      "dependsOn": ["supabase:dev", "stripe:listen"],
       "cache": false,
       "persistent": true
     },
-    "supabase:dev": {
-      "cache": false,
-      "persistent": true
-    },
-    "stripe:listen": {
-      "cache": false,
-      "persistent": true
-    },
+
     "lint": {
       "dependsOn": ["^build"]
     },
