@@ -345,7 +345,7 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
     price: null,
     currency: "USD",
     stripePriceId: null,
-    calComLink: "https://cal.com/franceshr/entrevistas",
+    calComLink: "https://cal.com/franceshr/entrevistas-simuladas",
     ctaText: "Agendar Entrevista Simulada",
     faqs: [
       {
