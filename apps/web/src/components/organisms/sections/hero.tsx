@@ -53,20 +53,17 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-foreground w-full text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:whitespace-pre md:text-5xl lg:text-6xl"
         >
-          Transforma tu carrera con
-          <br />
+          Transforma tu carrera profesional con{" "}
           <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            &nbsp;Resumes
+            Currículums Profesionales
           </span>
-          ,&nbsp;
-          <br className="md:hidden" />
+          ,{" "}
           <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Mentoria
-          </span>
-          &nbsp;y&nbsp;
-          <br />
+            Mentoría Personalizada
+          </span>{" "}
+          y{" "}
           <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Entrevistas Personalizadas
+            Entrevistas Simuladas Realistas
           </span>
         </motion.h1>
 

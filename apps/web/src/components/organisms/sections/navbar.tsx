@@ -12,9 +12,9 @@ export function Navbar() {
       <div className="flex w-full max-w-5xl items-center justify-between p-3 px-5 text-sm">
         <div className="flex items-center gap-5 font-semibold">
           <Image src={logo} alt="Logo" width={32} height={32} />
-          <h1 className="hidden font-sans text-3xl md:block">
+          <span className="hidden font-sans text-3xl font-bold md:block">
             <Link href={"/"}>FrancesHR</Link>
-          </h1>
+          </span>
         </div>
         {!hasEnvVars ? <EnvVarWarning /> : <AuthButton />}
       </div>

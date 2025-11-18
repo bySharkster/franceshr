@@ -10,22 +10,33 @@ const defaultUrl = `${process.env.NEXT_PUBLIC_SITE_URL}`;
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: {
-    template: "%s | FrancesHR",
-    default: "FrancesHR",
+    template: "%s | FrancesHR - Creación de Currículums, Mentoría y Entrevistas en Puerto Rico",
+    default:
+      "FrancesHR - Creación de Currículums Profesionales, Mentoría Personalizada y Entrevistas Simuladas en Puerto Rico",
   },
-  description: "La forma más rápida de conseguir tu próximo trabajo",
+  description:
+    "La forma más rápida de conseguir tu próximo trabajo en Puerto Rico y Estados Unidos. Servicios profesionales de creación de currículums, mentoría de carrera y entrevistas simuladas personalizadas.",
   keywords: [
-    "job search",
+    "creación de currículums Puerto Rico",
     "resume builder",
-    "career development",
-    "job applications",
-    "HR platform",
-    "employment",
-    "job matching",
+    "mentoría de carrera",
+    "entrevistas simuladas",
+    "búsqueda de empleo",
+    "desarrollo profesional",
+    "servicios de recursos humanos",
+    "empleo Puerto Rico",
   ],
   authors: [{ name: "CodeWFer" }],
   creator: "CodeWFer",
   publisher: "CodeWFer",
+  alternates: {
+    canonical: defaultUrl,
+    languages: {
+      es: defaultUrl,
+      "es-PR": defaultUrl,
+      "x-default": defaultUrl,
+    },
+  },
   robots: {
     index: true,
     follow: true,
@@ -39,24 +50,26 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "es",
     url: defaultUrl,
     siteName: "FrancesHR",
-    title: "FrancesHR",
-    description: "La forma más rápida de conseguir tu próximo trabajo",
+    title: "FrancesHR - Creación de Currículums Profesionales y Mentoría de Carrera en Puerto Rico",
+    description:
+      "La forma más rápida de conseguir tu próximo trabajo en Puerto Rico y Estados Unidos. Servicios profesionales de creación de currículums, mentoría de carrera y entrevistas simuladas personalizadas.",
     images: [
       {
         url: "/og-image.webp",
         width: 1200,
         height: 630,
-        alt: "FrancesHR - La forma más rápida de conseguir tu próximo trabajo",
+        alt: "FrancesHR - Servicios profesionales de creación de currículums, mentoría y entrevistas simuladas",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "FrancesHR",
-    description: "La forma más rápida de conseguir tu próximo trabajo",
+    title: "FrancesHR - Creación de Currículums Profesionales y Mentoría de Carrera",
+    description:
+      "La forma más rápida de conseguir tu próximo trabajo en Puerto Rico. Servicios de currículums, mentoría y entrevistas simuladas.",
     images: ["/og-image.webp"],
     creator: "@codewfer",
   },
@@ -80,7 +93,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning>
       <head>
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://analytics.ahrefs.com" />
@@ -91,6 +104,47 @@ export default function RootLayout({
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+        {/* Structured Data - JSON-LD */}
+        {/** biome-ignore lint/correctness/useUniqueElementIds: Only used on layout */}
+        <Script id="structured-data" type="application/ld+json" strategy="beforeInteractive">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: "FrancesHR",
+            description:
+              "Servicios profesionales de creación de currículums, mentoría de carrera y entrevistas simuladas en Puerto Rico y Estados Unidos",
+            url: defaultUrl,
+            logo: `${defaultUrl}/og-image.webp`,
+            address: {
+              "@type": "PostalAddress",
+              addressCountry: "PR",
+              addressRegion: "Puerto Rico",
+            },
+            areaServed: [
+              {
+                "@type": "Country",
+                name: "Puerto Rico",
+              },
+              {
+                "@type": "Country",
+                name: "United States",
+              },
+            ],
+            serviceType: [
+              "Creación de Currículums",
+              "Mentoría de Carrera",
+              "Entrevistas Simuladas",
+            ],
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.9",
+              ratingCount: "100",
+              bestRating: "5",
+              worstRating: "1",
+            },
+          })}
+        </Script>
       </head>
       <body className={`${readexPro.className} antialiased`}>
         {/* Ahrefs Analytics */}

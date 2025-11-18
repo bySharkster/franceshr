@@ -113,7 +113,7 @@ export const Header = ({
               className="h-8 w-8"
               priority
             />
-            <h1 className="hidden font-sans text-2xl md:flex">FrancesHR</h1>
+            <span className="hidden font-sans text-2xl font-bold md:flex">FrancesHR</span>
           </Link>
         </div>
 
