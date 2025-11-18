@@ -51,10 +51,10 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-foreground w-full text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:whitespace-pre md:text-5xl lg:text-6xl"
+          className="text-foreground w-full max-w-2xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl lg:max-w-3xl lg:text-5xl"
         >
           Transforma tu carrera profesional con{" "}
-          <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent md:whitespace-nowrap">
             Currículums Profesionales
           </span>
           ,{" "}
