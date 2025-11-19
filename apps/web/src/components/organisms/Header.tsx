@@ -100,7 +100,7 @@ export const Header = ({
   };
 
   return (
-    <nav className="border-b-foreground/10 flex h-16 w-full justify-center border-b">
+    <nav className="border-b-foreground/10 z-50 flex h-16 w-full justify-center border-b">
       <div className="relative flex w-full max-w-7xl items-center justify-between gap-4 p-3 px-5 text-sm">
         {/* Logo */}
         <div className="flex items-center gap-3 font-semibold">

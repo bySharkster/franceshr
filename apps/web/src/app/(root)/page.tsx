@@ -53,7 +53,7 @@ export default function Home() {
       {/* Navbar */}
       <HeaderWrapper />
       {/* Main Content */}
-      <div className="relative flex w-full flex-1 flex-col">
+      <div className="relative z-0 flex w-full flex-1 flex-col">
         <div
           className="bg-background absolute inset-0 -z-10 h-full w-full"
           style={{
