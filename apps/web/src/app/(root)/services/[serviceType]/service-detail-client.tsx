@@ -260,6 +260,7 @@ export function ServiceDetailClient({ serviceType }: ServiceDetailClientProps) {
           >
             <Link
               href={service.calComLink || checkoutUrl}
+              rel={service.calComLink ? "noopener noreferrer" : undefined}
               target={service.calComLink ? "_blank" : "_self"}
             >
               {service.ctaText}
