@@ -2,8 +2,9 @@ import { Cookie, Info, Settings, Shield } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Cookie Policy",
-  description: "Cookie Policy and Tracking Technologies for FrancesHR",
+  title: "Política de Cookies",
+  description:
+    "Información sobre las cookies y tecnologías de seguimiento que usa FrancesHR. Controla tus preferencias de privacidad.",
 };
 
 export default function CookiePolicy() {

@@ -26,10 +26,26 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
-                  href="/services/resume-profesional"
-                  className="text-text transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                  href="/services/resume-basico"
+                  className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
                 >
-                  Optimización de CV
+                  Resume Básico
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/resume-profesional"
+                  className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                >
+                  Resume para Profesionales
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/resume-ejecutivo"
+                  className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                >
+                  Resume para Ejecutivos
                 </Link>
               </li>
               <li>
@@ -37,7 +53,7 @@ export function Footer() {
                   href="/services/mentorias-laborales"
                   className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
                 >
-                  Mentorias Laborales
+                  Mentorías Laborales
                 </Link>
               </li>
               <li>

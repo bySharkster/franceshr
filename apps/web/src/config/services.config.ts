@@ -34,7 +34,7 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
     icon: Briefcase,
     title: "Resume Básico",
     shortDescription:
-      "Haz que tu resume comunique tu valor real. Diseños modernos, contenido estratégico y redacción optimizada para captar la atención de reclutadores y sistemas automatizados (ATS).",
+      "Resume profesional optimizado para ATS. Diseño moderno y redacción estratégica para captar la atención de reclutadores.",
     extendedDescription:
       "Tu resume es tu carta de presentación profesional. En FrancesHR, transformamos tu experiencia en un documento que destaca tus logros, habilidades y potencial. Utilizamos estrategias de redacción optimizadas para sistemas ATS y diseños modernos que captan la atención de reclutadores desde el primer vistazo.",
     features: [
@@ -110,7 +110,7 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
     icon: Briefcase,
     title: "Resume Profesional",
     shortDescription:
-      "Haz que tu resume comunique tu valor real. Diseños modernos, contenido estratégico y redacción optimizada para captar la atención de reclutadores y sistemas automatizados (ATS).",
+      "Resume avanzado para profesionales con experiencia. Optimizado para ATS con diseño premium y enfoque en logros medibles.",
     extendedDescription:
       "Tu resume es tu carta de presentación profesional. En FrancesHR, transformamos tu experiencia en un documento que destaca tus logros, habilidades y potencial. Utilizamos estrategias de redacción optimizadas para sistemas ATS y diseños modernos que captan la atención de reclutadores desde el primer vistazo.",
     features: [
@@ -185,7 +185,7 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
     icon: Briefcase,
     title: "Resume Ejecutivo",
     shortDescription:
-      "Resume premium para líderes y ejecutivos. Destaca tu impacto estratégico, liderazgo y resultados con un diseño sofisticado que refleja tu nivel profesional.",
+      "Resume ejecutivo para líderes y C-Level. Destaca tu impacto estratégico y liderazgo con diseño premium.",
     extendedDescription:
       "El Resume Ejecutivo está diseñado específicamente para profesionales de alto nivel, directores y ejecutivos. Destacamos tu visión estratégica, capacidad de liderazgo y resultados medibles con un formato premium que comunica autoridad y experiencia. Incluye análisis profundo de logros, métricas de impacto y posicionamiento estratégico para roles de alta dirección.",
     features: [
@@ -264,7 +264,7 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
     icon: Users,
     title: "Mentorías Laborales",
     shortDescription:
-      "Recibe orientación personalizada para definir objetivos, fortalecer tu marca personal y trazar un plan efectivo de crecimiento profesional.",
+      "Mentoría personalizada para definir objetivos y fortalecer tu marca personal. Plan de crecimiento profesional efectivo.",
     extendedDescription:
       "Las mentorías laborales son sesiones personalizadas donde trabajamos juntos para identificar tus fortalezas, definir objetivos claros y crear estrategias efectivas para alcanzar tus metas profesionales. Ya sea que busques un cambio de carrera, ascenso o desarrollo de habilidades, te guiaré en cada paso del camino.",
     features: [
@@ -331,7 +331,7 @@ export const SERVICES_DATA: Record<string, ServiceDetails> = {
     icon: MessageSquare,
     title: "Entrevistas Simuladas",
     shortDescription:
-      "Prepárate con una experta en coaching laboral y reclutamiento. Mejora tus respuestas, lenguaje corporal y seguridad antes de tu próxima entrevista.",
+      "Practica con una experta en reclutamiento. Mejora tus respuestas, lenguaje corporal y confianza para tu entrevista.",
     extendedDescription:
       "Las entrevistas simuladas te preparan para el momento real. Practicaremos preguntas comunes y difíciles, trabajaremos en tu lenguaje corporal, y te daré retroalimentación detallada para que llegues a tu entrevista con confianza y preparación.",
     features: [

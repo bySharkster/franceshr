@@ -10,12 +10,11 @@ const defaultUrl = `${process.env.NEXT_PUBLIC_SITE_URL}`;
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: {
-    template: "%s | FrancesHR - Creación de Currículums, Mentoría y Entrevistas en Puerto Rico",
-    default:
-      "FrancesHR - Creación de Currículums Profesionales, Mentoría Personalizada y Entrevistas Simuladas en Puerto Rico",
+    template: "%s | FrancesHR",
+    default: "FrancesHR - Currículums, Mentoría y Entrevistas en Puerto Rico",
   },
   description:
-    "La forma más rápida de conseguir tu próximo trabajo en Puerto Rico y Estados Unidos. Servicios profesionales de creación de currículums, mentoría de carrera y entrevistas simuladas personalizadas.",
+    "Consigue tu próximo trabajo en Puerto Rico. Servicios de currículums profesionales, mentoría de carrera y entrevistas simuladas.",
   keywords: [
     "creación de currículums Puerto Rico",
     "resume builder",
@@ -29,14 +28,7 @@ export const metadata: Metadata = {
   authors: [{ name: "CodeWFer" }],
   creator: "CodeWFer",
   publisher: "CodeWFer",
-  alternates: {
-    // canonical: defaultUrl, // This has to me commented out in order to prevent crawlers from indexing the same page multiple times
-    languages: {
-      es: defaultUrl,
-      "es-PR": defaultUrl,
-      "x-default": defaultUrl,
-    },
-  },
+  // alternates are set per-page to ensure correct self-referencing canonical and hreflang
   robots: {
     index: true,
     follow: true,
@@ -53,9 +45,9 @@ export const metadata: Metadata = {
     locale: "es",
     url: defaultUrl,
     siteName: "FrancesHR",
-    title: "FrancesHR - Creación de Currículums Profesionales y Mentoría de Carrera en Puerto Rico",
+    title: "FrancesHR - Currículums, Mentoría y Entrevistas en Puerto Rico",
     description:
-      "La forma más rápida de conseguir tu próximo trabajo en Puerto Rico y Estados Unidos. Servicios profesionales de creación de currículums, mentoría de carrera y entrevistas simuladas personalizadas.",
+      "Consigue tu próximo trabajo en Puerto Rico. Servicios de currículums profesionales, mentoría de carrera y entrevistas simuladas.",
     images: [
       {
         url: "/og-image.webp",
@@ -67,9 +59,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "FrancesHR - Creación de Currículums Profesionales y Mentoría de Carrera",
+    title: "FrancesHR - Currículums, Mentoría y Entrevistas",
     description:
-      "La forma más rápida de conseguir tu próximo trabajo en Puerto Rico. Servicios de currículums, mentoría y entrevistas simuladas.",
+      "Consigue tu próximo trabajo en Puerto Rico. Servicios de currículums profesionales, mentoría de carrera y entrevistas simuladas.",
     images: ["/og-image.webp"],
     creator: "@codewfer",
   },

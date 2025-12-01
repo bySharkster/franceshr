@@ -2,8 +2,9 @@ import { Database, Eye, FileText, Lock, Mail, Shield } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Privacy Policy",
-  description: "Privacy Policy and Data Protection Information for FrancesHR",
+  title: "Política de Privacidad",
+  description:
+    "Conoce cómo FrancesHR protege tu información personal. Política de privacidad, protección de datos y derechos GDPR/CCPA.",
 };
 
 export default function PrivacyPolicy() {

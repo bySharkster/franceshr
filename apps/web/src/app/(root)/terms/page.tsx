@@ -2,8 +2,9 @@ import { AlertTriangle, CheckCircle, FileText, Scale } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Terms of Service",
-  description: "Terms of Service and User Agreement for FrancesHR",
+  title: "Términos de Servicio",
+  description:
+    "Lee los términos y condiciones de uso de FrancesHR. Información sobre pagos, políticas de reembolso y acuerdos de usuario.",
 };
 
 export default function TermsOfService() {
