@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   creator: "CodeWFer",
   publisher: "CodeWFer",
   alternates: {
-    canonical: defaultUrl,
+    // canonical: defaultUrl, // This has to me commented out in order to prevent crawlers from indexing the same page multiple times
     languages: {
       es: defaultUrl,
       "es-PR": defaultUrl,
