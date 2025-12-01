@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${service.title} | FrancesHR`,
       description: service.shortDescription,
       type: "website",
+      url: `https://franceshr.com/services/${serviceType}`,
     },
   };
 }

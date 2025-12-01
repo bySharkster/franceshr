@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     description:
       "Conoce a Frances Rodríguez, especialista en Recursos Humanos con experiencia en reclutamiento, desarrollo profesional y asesoría de carrera en Puerto Rico.",
     type: "website",
+    url: "https://franceshr.com/about",
   },
 };
 
