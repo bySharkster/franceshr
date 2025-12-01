@@ -2,7 +2,7 @@ import { Cookie, Info, Settings, Shield } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Cookie Policy | FrancesHR",
+  title: "Cookie Policy",
   description: "Cookie Policy and Tracking Technologies for FrancesHR",
 };
 

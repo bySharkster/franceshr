@@ -2,7 +2,7 @@ import { Database, Eye, FileText, Lock, Mail, Shield } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Privacy Policy | FrancesHR",
+  title: "Privacy Policy",
   description: "Privacy Policy and Data Protection Information for FrancesHR",
 };
 
