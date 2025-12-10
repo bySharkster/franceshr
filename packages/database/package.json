@@ -21,7 +21,7 @@
   "dependencies": {
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
-    "next": "latest",
+    "next": "15.5.7",
     "server-only": "^0.0.1"
   },
   "devDependencies": {
