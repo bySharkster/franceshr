@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 import { HeaderWrapper } from "@/components/organisms/HeaderWrapper";
 import { Hero } from "@/components/organisms/sections/hero";
@@ -51,7 +52,9 @@ export default function Home() {
   return (
     <div className="flex min-h-screen w-full flex-col items-center">
       {/* Navbar */}
-      <HeaderWrapper />
+      <Suspense fallback={<div>Loading...</div>}>
+        <HeaderWrapper />
+      </Suspense>
       {/* Main Content */}
       <div className="relative z-0 flex w-full flex-1 flex-col">
         <div
