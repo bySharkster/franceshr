@@ -20,6 +20,7 @@ export async function HeaderWrapper() {
   const supabase = await createClient();
   const { data } = await supabase.auth.getClaims();
   const user: JwtPayload | null = data?.claims || null;
+  const userFullName = String(user?.user_metadata.full_name || "");
 
   const navSection = <NavSection />;
   // Build the auth section with real Next.js Links and forms
@@ -27,7 +28,7 @@ export async function HeaderWrapper() {
     <EnvVarWarning />
   ) : user ? (
     <div className="flex items-center gap-4">
-      <span className="hidden md:block">Hola, {user.user_metadata.full_name}!</span>
+      <span className="hidden md:block">Hola, {userFullName}!</span>
       <Button asChild size="sm" variant="default" className="lex">
         <Link href="/app">Ir al App</Link>
       </Button>
